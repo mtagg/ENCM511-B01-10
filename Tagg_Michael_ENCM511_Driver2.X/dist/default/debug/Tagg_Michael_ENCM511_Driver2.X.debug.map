@@ -4,10 +4,15 @@ Tool Name:
   d:\program files\microchip\xc16\v1.60\bin\bin\..\bin/elf-ld.exe
 
 Command:
+  -TC:\\Users\\mmmta\\AppData\\Local\\Temp\\tmp00003598.00 \
+  -TC:\\Users\\mmmta\\AppData\\Local\\Temp\\tmp00003598.01 \
+  -TC:\\Users\\mmmta\\AppData\\Local\\Temp\\tmp00003598.02 \
+  -TC:\\Users\\mmmta\\AppData\\Local\\Temp\\tmp00003598.03 \
+  -TC:\\Users\\mmmta\\AppData\\Local\\Temp\\tmp00003598.04 \
   -p24F08KA101 \
   --mdfp=D:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16 \
   -o \
-  dist/default/production/Tagg_Michael_ENCM511_Driver2.X.production.elf \
+  dist/default/debug/Tagg_Michael_ENCM511_Driver2.X.debug.elf \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/.. \
   -LD:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16/bin/../support/PIC24F/gld \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../lib \
@@ -18,10 +23,13 @@ Command:
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../support/dsPIC33C/gld \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../support/dsPIC33E/gld \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/main.o \
-  build/default/production/IOs.o \
+  build/default/debug/main.o \
+  build/default/debug/IOs.o \
   --defsym=__MPLAB_BUILD=1 \
-  -Tp24F08KA101.gld.00 \
+  --defsym=__MPLAB_DEBUG=1 \
+  --defsym=__DEBUG=1 \
+  --defsym=__MPLAB_DEBUGGER_PK3=1 \
+  -Tp24F08KA101.gld.05 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -33,10 +41,10 @@ Command:
   --stackguard=16 \
   --no-force-link \
   --smart-io \
-  -Map=dist/default/production/Tagg_Michael_ENCM511_Driver2.X.production.map \
+  -Map=dist/default/debug/Tagg_Michael_ENCM511_Driver2.X.debug.map \
   --report-mem \
   --memorysummary \
-  dist/default/production/memoryfile.xml \
+  dist/default/debug/memoryfile.xml \
   -start-group \
   --library=lega-pic30-elf \
   --library=m-elf \
@@ -66,17 +74,22 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
-.text                        0x2ce                0x90            0xd8  (216)
+.text                        0x2ce                0x4e            0x75  (117)
 
-                 Total "program" memory used (bytes):          0x20d  (525) 6%
+                 Total "program" memory used (bytes):          0x1aa  (426) 5%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
+reserve_data_0x800           0x800                0x20            0x20  (32)
+reserve_data_0x820           0x820                 0x2             0x2  (2)
+reserve_data_0x822           0x822                 0x2             0x2  (2)
+reserve_data_0x824           0x824                 0x2             0x2  (2)
+reserve_data_0x826           0x826                0x2a            0x2a  (42)
 
-                 Total "data" memory used (bytes):              0  (0) 
+                 Total "data" memory used (bytes):           0x50  (80) 5%
 
 
 Dynamic Memory Usage
@@ -84,9 +97,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x800                               0x600  (1536)
+stack                        0x850                               0x5b0  (1456)
 
-                 Maximum dynamic memory (bytes):          0x600  (1536)
+                 Maximum dynamic memory (bytes):          0x5b0  (1456)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -100,12 +113,12 @@ External Symbols in Program Memory (by address):
                   0x0002c8                  __DefaultInterrupt
                   0x0002ce                  _delay_s
                   0x000304                  _IOinit
-                  0x000318                  _CheckPushButtons
-                  0x000356                  _main
+                  0x00030c                  _CheckPushButtons
+                  0x000314                  _main
 
 External Symbols in Program Memory (by name):
 
-                  0x000318                  _CheckPushButtons
+                  0x00030c                  _CheckPushButtons
                   0x000304                  _IOinit
                   0x0002c8                  __DefaultInterrupt
                   0x000252                  __data_init
@@ -113,7 +126,7 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x0002ce                  _delay_s
-                  0x000356                  _main
+                  0x000314                  _main
 
 Memory Configuration
 
@@ -137,9 +150,37 @@ FDS              0xf80010           0x000002
 
 Linker script and memory map
 
-LOAD build/default/production/main.o
-LOAD build/default/production/IOs.o
+
+reserve_data_0x800
+                    0x0800         0x20
+                    0x0820                  . = 0x20
+ *fill*             0x0800         0x2000
+
+reserve_data_0x820
+                    0x0820          0x2
+                    0x0822                  . = 0x2
+ *fill*             0x0820          0x200
+
+reserve_data_0x822
+                    0x0822          0x2
+                    0x0824                  . = 0x2
+ *fill*             0x0822          0x200
+
+reserve_data_0x824
+                    0x0824          0x2
+                    0x0826                  . = 0x2
+ *fill*             0x0824          0x200
+
+reserve_data_0x826
+                    0x0826         0x2a
+                    0x0850                  . = 0x2a
+ *fill*             0x0826         0x2a00
+LOAD build/default/debug/main.o
+LOAD build/default/debug/IOs.o
                     0x0001                  __MPLAB_BUILD = 0x1
+                    0x0001                  __MPLAB_DEBUG = 0x1
+                    0x0001                  __DEBUG = 0x1
+                    0x0001                  __MPLAB_DEBUGGER_PK3 = 0x1
 LOAD pPIC24Fxxx
 LOAD d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libfx-elf.a
                     0xf80000                  __FBS = 0xf80000
@@ -217,30 +258,30 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x9a6
+.debug_info       0x000000        0x504
  *(.debug_info)
- .debug_info      0x000000         0xe5 build/default/production/main.o
- .debug_info      0x0000e5        0x8c1 build/default/production/IOs.o
+ .debug_info      0x000000         0xe5 build/default/debug/main.o
+ .debug_info      0x0000e5        0x41f build/default/debug/IOs.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x12a
+.debug_abbrev     0x000000         0xf5
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0x36 build/default/production/main.o
- .debug_abbrev    0x000036         0xf4 build/default/production/IOs.o
+ .debug_abbrev    0x000000         0x36 build/default/debug/main.o
+ .debug_abbrev    0x000036         0xbf build/default/debug/IOs.o
 
-.debug_line       0x000000        0x157
+.debug_line       0x000000        0x147
  *(.debug_line)
- .debug_line      0x000000         0x34 build/default/production/main.o
- .debug_line      0x000034        0x123 build/default/production/IOs.o
+ .debug_line      0x000000         0x34 build/default/debug/main.o
+ .debug_line      0x000034        0x113 build/default/debug/IOs.o
 
 .debug_frame      0x000000         0x90
  *(.debug_frame)
- .debug_frame     0x000000         0x2e build/default/production/main.o
- .debug_frame     0x00002e         0x62 build/default/production/IOs.o
+ .debug_frame     0x000000         0x2e build/default/debug/main.o
+ .debug_frame     0x00002e         0x62 build/default/debug/IOs.o
 
-.debug_str        0x000000         0x45
+.debug_str        0x000000         0x13
  *(.debug_str)
- .debug_str       0x000000         0x45 build/default/production/IOs.o
+ .debug_str       0x000000         0x13 build/default/debug/IOs.o
 
 .debug_loc
  *(.debug_loc)
@@ -252,9 +293,9 @@ __FDS
                   0x000000         0x59
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x1b build/default/production/main.o
+                  0x000000         0x1b build/default/debug/main.o
  .debug_pubnames
-                  0x00001b         0x3e build/default/production/IOs.o
+                  0x00001b         0x3e build/default/debug/IOs.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -262,9 +303,9 @@ __FDS
 .debug_aranges    0x000000         0x30
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/production/main.o
+                  0x000000         0x18 build/default/debug/main.o
  .debug_aranges
-                  0x000018         0x18 build/default/production/IOs.o
+                  0x000018         0x18 build/default/debug/IOs.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -670,29 +711,29 @@ LOAD d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a
 LOAD d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a
 LOAD d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a
 END GROUP
-OUTPUT(dist/default/production/Tagg_Michael_ENCM511_Driver2.X.production.elf elf32-pic30)
+OUTPUT(dist/default/debug/Tagg_Michael_ENCM511_Driver2.X.debug.elf elf32-pic30)
 LOAD default_isr
 
 __c30_signature
                   0x000030         0x18
  __c30_signature
-                  0x000030          0x6 build/default/production/main.o
+                  0x000030          0x6 build/default/debug/main.o
  __c30_signature
-                  0x000036          0x6 build/default/production/IOs.o
+                  0x000036          0x6 build/default/debug/IOs.o
  __c30_signature
                   0x00003c          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
                   0x000042          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
 .debug_pubtypes
-                  0x000048         0xf6
+                  0x000048         0x5b
  .debug_pubtypes
-                  0x000048         0xf6 build/default/production/IOs.o
+                  0x000048         0x5b build/default/debug/IOs.o
 
-.text             0x0002ce         0x90
- .text            0x0002ce         0x88 build/default/production/IOs.o
+.text             0x0002ce         0x4e
+ .text            0x0002ce         0x46 build/default/debug/IOs.o
                   0x0002ce                  _delay_s
                   0x000304                  _IOinit
-                  0x000318                  _CheckPushButtons
- .text            0x000356          0x8 build/default/production/main.o
-                  0x000356                  _main
+                  0x00030c                  _CheckPushButtons
+ .text            0x000314          0x8 build/default/debug/main.o
+                  0x000314                  _main
