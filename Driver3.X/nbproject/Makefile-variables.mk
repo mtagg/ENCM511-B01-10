@@ -6,8 +6,8 @@
 CND_BASEDIR=`pwd`
 # default configuration
 CND_ARTIFACT_DIR_default=dist/default/production
-CND_ARTIFACT_NAME_default=B01-10_ENCM511_Driver3.X.production.hex
-CND_ARTIFACT_PATH_default=dist/default/production/B01-10_ENCM511_Driver3.X.production.hex
+CND_ARTIFACT_NAME_default=Driver3.X.production.hex
+CND_ARTIFACT_PATH_default=dist/default/production/Driver3.X.production.hex
 CND_PACKAGE_DIR_default=${CND_DISTDIR}/default/package
-CND_PACKAGE_NAME_default=b01-10encm511driver3.x.tar
-CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/b01-10encm511driver3.x.tar
+CND_PACKAGE_NAME_default=driver3.x.tar
+CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/driver3.x.tar
