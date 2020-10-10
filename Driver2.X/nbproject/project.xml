@@ -3,8 +3,8 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>Tagg_Michael_ENCM511_Driver2</name>
-            <creation-uuid>7d4f07a4-c051-48cd-91ca-4adc98e8310a</creation-uuid>
+            <name>Driver2</name>
+            <creation-uuid>a9a49c81-2c68-4df4-8ffa-e49e12ef1c8e</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>
@@ -12,7 +12,9 @@
             <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem/>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>default</name>

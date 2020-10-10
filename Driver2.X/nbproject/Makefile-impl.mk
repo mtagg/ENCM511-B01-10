@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Tagg_Michael_ENCM511_Driver2.X
+PROJECTNAME=Driver2.X
 
 # Active Configuration
 DEFAULTCONF=default
