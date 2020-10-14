@@ -66,9 +66,9 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
-.text                        0x2ce                0xca           0x12f  (303)
+.text                        0x2ce               0x110           0x198  (408)
 
-                 Total "program" memory used (bytes):          0x264  (612) 3%
+                 Total "program" memory used (bytes):          0x2cd  (717) 4%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -101,7 +101,7 @@ External Symbols in Program Memory (by address):
                   0x0002ce                  _delay_s
                   0x00030c                  _IOinit
                   0x000324                  _CheckPushButtons
-                  0x000390                  _main
+                  0x0003d6                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -113,7 +113,7 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x0002ce                  _delay_s
-                  0x000390                  _main
+                  0x0003d6                  _main
 
 Memory Configuration
 
@@ -228,10 +228,10 @@ __FDS
  .debug_abbrev    0x000000        0x105 build/default/production/IOs.o
  .debug_abbrev    0x000105         0x36 build/default/production/main.o
 
-.debug_line       0x000000        0x160
+.debug_line       0x000000        0x164
  *(.debug_line)
- .debug_line      0x000000        0x12c build/default/production/IOs.o
- .debug_line      0x00012c         0x34 build/default/production/main.o
+ .debug_line      0x000000        0x130 build/default/production/IOs.o
+ .debug_line      0x000130         0x34 build/default/production/main.o
 
 .debug_frame      0x000000         0x90
  *(.debug_frame)
@@ -689,10 +689,10 @@ __c30_signature
  __c30_signature
                   0x000144          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
-.text             0x0002ce         0xca
- .text            0x0002ce         0xc2 build/default/production/IOs.o
+.text             0x0002ce        0x110
+ .text            0x0002ce        0x108 build/default/production/IOs.o
                   0x0002ce                  _delay_s
                   0x00030c                  _IOinit
                   0x000324                  _CheckPushButtons
- .text            0x000390          0x8 build/default/production/main.o
-                  0x000390                  _main
+ .text            0x0003d6          0x8 build/default/production/main.o
+                  0x0003d6                  _main
