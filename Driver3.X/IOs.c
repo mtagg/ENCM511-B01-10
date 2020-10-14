@@ -1,6 +1,17 @@
 #include "xc.h"
 #include "IOs.h"
 
+void interrupt (uint8_t t){
+    //configure interrupt based on seconds of delay requested, t
+    // figure out which macro functions we need - idle? sleep?
+    //which registers need to be set or reset to do interrupts
+    //how to control timing of the interupts / delays
+    //look at that data shiiieeeeeett
+    
+    
+    
+}
+
 void IOinit(void){
     
     AD1PCFG = 0xFFFF;            // set all analog pins as digital 

@@ -4,7 +4,7 @@ Tool Name:
   d:\program files\microchip\xc16\v1.60\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -p24F08KA101 \
+  -p24F16KA101 \
   --mdfp=D:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16 \
   -o \
   dist/default/production/Driver2.X.production.elf \
@@ -21,7 +21,7 @@ Command:
   build/default/production/IOs.o \
   build/default/production/main.o \
   --defsym=__MPLAB_BUILD=1 \
-  -Tp24F08KA101.gld.00 \
+  -Tp24F16KA101.gld.00 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -61,14 +61,14 @@ Default Code Model: Small
 Default Data Model: Small
 Default Scalar Model: Small
 
-"program" Memory  [Origin = 0x200, Length = 0x1400]
+"program" Memory  [Origin = 0x200, Length = 0x2a00]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
-.text                        0x2ce                0xb6           0x111  (273)
+.text                        0x2ce                0xca           0x12f  (303)
 
-                 Total "program" memory used (bytes):          0x246  (582) 7%
+                 Total "program" memory used (bytes):          0x264  (612) 3%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -99,21 +99,21 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init_standard
                   0x0002c8                  __DefaultInterrupt
                   0x0002ce                  _delay_s
-                  0x000304                  _IOinit
-                  0x00031c                  _CheckPushButtons
-                  0x00037c                  _main
+                  0x00030c                  _IOinit
+                  0x000324                  _CheckPushButtons
+                  0x000390                  _main
 
 External Symbols in Program Memory (by name):
 
-                  0x00031c                  _CheckPushButtons
-                  0x000304                  _IOinit
+                  0x000324                  _CheckPushButtons
+                  0x00030c                  _IOinit
                   0x0002c8                  __DefaultInterrupt
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x0002ce                  _delay_s
-                  0x00037c                  _main
+                  0x000390                  _main
 
 Memory Configuration
 
@@ -123,7 +123,7 @@ reset            0x000000           0x000004
 ivt              0x000004           0x0000fc  
 _reserved        0x000100           0x000004  
 aivt             0x000104           0x0000fc  
-program          0x000200           0x001400           xr
+program          0x000200           0x002a00           xr
 eedata           0x7ffe00           0x000200  
 FBS              0xf80000           0x000002  
 FGS              0xf80004           0x000002  
@@ -152,7 +152,7 @@ LOAD d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libfx-elf.a
                     0xf80010                  __FDS = 0xf80010
                     0x0001                  __NO_HANDLES = 0x1
                     0x0200                  __CODE_BASE = 0x200
-                    0x1400                  __CODE_LENGTH = 0x1400
+                    0x2a00                  __CODE_LENGTH = 0x2a00
                     0x0004                  __IVT_BASE = 0x4
                     0x0104                  __AIVT_BASE = 0x104
                     0x0800                  __DATA_BASE = 0x800
@@ -217,10 +217,10 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x979
+.debug_info       0x000000        0x988
  *(.debug_info)
- .debug_info      0x000000        0x8bf build/default/production/IOs.o
- .debug_info      0x0008bf         0xba build/default/production/main.o
+ .debug_info      0x000000        0x8ce build/default/production/IOs.o
+ .debug_info      0x0008ce         0xba build/default/production/main.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x13b
@@ -228,10 +228,10 @@ __FDS
  .debug_abbrev    0x000000        0x105 build/default/production/IOs.o
  .debug_abbrev    0x000105         0x36 build/default/production/main.o
 
-.debug_line       0x000000        0x15b
+.debug_line       0x000000        0x160
  *(.debug_line)
- .debug_line      0x000000        0x127 build/default/production/IOs.o
- .debug_line      0x000127         0x34 build/default/production/main.o
+ .debug_line      0x000000        0x12c build/default/production/IOs.o
+ .debug_line      0x00012c         0x34 build/default/production/main.o
 
 .debug_frame      0x000000         0x90
  *(.debug_frame)
@@ -674,25 +674,25 @@ OUTPUT(dist/default/production/Driver2.X.production.elf elf32-pic30)
 LOAD default_isr
 
 .debug_pubtypes
-                  0x000030         0xf6
+                  0x000030        0x102
  .debug_pubtypes
-                  0x000030         0xf6 build/default/production/IOs.o
+                  0x000030        0x102 build/default/production/IOs.o
 
 __c30_signature
-                  0x000126         0x18
+                  0x000132         0x18
  __c30_signature
-                  0x000126          0x6 build/default/production/IOs.o
+                  0x000132          0x6 build/default/production/IOs.o
  __c30_signature
-                  0x00012c          0x6 build/default/production/main.o
+                  0x000138          0x6 build/default/production/main.o
  __c30_signature
-                  0x000132          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x00013e          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x000138          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000144          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
-.text             0x0002ce         0xb6
- .text            0x0002ce         0xae build/default/production/IOs.o
+.text             0x0002ce         0xca
+ .text            0x0002ce         0xc2 build/default/production/IOs.o
                   0x0002ce                  _delay_s
-                  0x000304                  _IOinit
-                  0x00031c                  _CheckPushButtons
- .text            0x00037c          0x8 build/default/production/main.o
-                  0x00037c                  _main
+                  0x00030c                  _IOinit
+                  0x000324                  _CheckPushButtons
+ .text            0x000390          0x8 build/default/production/main.o
+                  0x000390                  _main
