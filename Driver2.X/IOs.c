@@ -3,7 +3,7 @@
 void delay_s(uint8_t t){
     long int d;
     while (t--){ // loops an amount of times == seconds requested
-        d =100000; 
+        d =150000;    //150000 = 8 000 000 / 80 where 80 is the estimated amount of clock cycles per while loop iteration
         while (d-->0){} // ~ 1 second's worth of instructions
     }return;
 }
