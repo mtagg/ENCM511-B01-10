@@ -17,6 +17,8 @@
       <itemPath>main.c</itemPath>
       <itemPath>IOs.c</itemPath>
       <itemPath>IOs.h</itemPath>
+      <itemPath>delay_s.c</itemPath>
+      <itemPath>delay_s.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -21,6 +21,7 @@ Command:
   build/default/production/ChangeClk.o \
   build/default/production/main.o \
   build/default/production/IOs.o \
+  build/default/production/delay_s.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp24F16KA101.gld.00 \
   --stack=16 \
@@ -67,9 +68,9 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
-.text                        0x2ce                0xee           0x165  (357)
+.text                        0x2ce               0x178           0x234  (564)
 
-                 Total "program" memory used (bytes):          0x29a  (666) 4%
+                 Total "program" memory used (bytes):          0x369  (873) 5%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -96,25 +97,27 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00023c                  __psv_init
-                  0x000252                  __data_init
                   0x000252                  __data_init_standard
+                  0x000252                  __data_init
                   0x0002c8                  __DefaultInterrupt
-                  0x0002ce                  _NewClk
-                  0x000342                  _IOinit
-                  0x00035a                  _CheckPushButtons
-                  0x0003b0                  _main
+                  0x0002ce                  _IOinit
+                  0x0002e6                  _CheckPushButtons
+                  0x000398                  _NewClk
+                  0x00040c                  _delay_s
+                  0x00043a                  _main
 
 External Symbols in Program Memory (by name):
 
-                  0x00035a                  _CheckPushButtons
-                  0x000342                  _IOinit
-                  0x0002ce                  _NewClk
+                  0x0002e6                  _CheckPushButtons
+                  0x0002ce                  _IOinit
+                  0x000398                  _NewClk
                   0x0002c8                  __DefaultInterrupt
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0003b0                  _main
+                  0x00040c                  _delay_s
+                  0x00043a                  _main
 
 Memory Configuration
 
@@ -141,6 +144,7 @@ Linker script and memory map
 LOAD build/default/production/ChangeClk.o
 LOAD build/default/production/main.o
 LOAD build/default/production/IOs.o
+LOAD build/default/production/delay_s.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
 LOAD d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libfx-elf.a
@@ -219,35 +223,40 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000        0xf31
+.debug_info       0x000000       0x1471
  *(.debug_info)
  .debug_info      0x000000        0x552 build/default/production/ChangeClk.o
  .debug_info      0x000552        0x154 build/default/production/main.o
  .debug_info      0x0006a6        0x88b build/default/production/IOs.o
+ .debug_info      0x000f31        0x540 build/default/production/delay_s.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x229
+.debug_abbrev     0x000000        0x2ff
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x123 build/default/production/ChangeClk.o
  .debug_abbrev    0x000123         0x36 build/default/production/main.o
  .debug_abbrev    0x000159         0xd0 build/default/production/IOs.o
+ .debug_abbrev    0x000229         0xd6 build/default/production/delay_s.o
 
-.debug_line       0x000000        0x270
+.debug_line       0x000000        0x395
  *(.debug_line)
  .debug_line      0x000000        0x11b build/default/production/ChangeClk.o
  .debug_line      0x00011b         0x37 build/default/production/main.o
- .debug_line      0x000152        0x11e build/default/production/IOs.o
+ .debug_line      0x000152        0x128 build/default/production/IOs.o
+ .debug_line      0x00027a        0x11b build/default/production/delay_s.o
 
-.debug_frame      0x000000         0xa4
+.debug_frame      0x000000         0xd2
  *(.debug_frame)
  .debug_frame     0x000000         0x2e build/default/production/ChangeClk.o
  .debug_frame     0x00002e         0x2e build/default/production/main.o
  .debug_frame     0x00005c         0x48 build/default/production/IOs.o
+ .debug_frame     0x0000a4         0x2e build/default/production/delay_s.o
 
-.debug_str        0x000000         0x5b
+.debug_str        0x000000         0x77
  *(.debug_str)
  .debug_str       0x000000         0x16 build/default/production/ChangeClk.o
  .debug_str       0x000016         0x45 build/default/production/IOs.o
+ .debug_str       0x00005b         0x1c build/default/production/delay_s.o
 
 .debug_loc
  *(.debug_loc)
@@ -256,7 +265,7 @@ __FDS
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0x6a
+                  0x000000         0x88
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1d build/default/production/ChangeClk.o
@@ -264,11 +273,13 @@ __FDS
                   0x00001d         0x1b build/default/production/main.o
  .debug_pubnames
                   0x000038         0x32 build/default/production/IOs.o
+ .debug_pubnames
+                  0x00006a         0x1e build/default/production/delay_s.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x48
+.debug_aranges    0x000000         0x60
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/ChangeClk.o
@@ -276,6 +287,8 @@ __FDS
                   0x000018         0x18 build/default/production/main.o
  .debug_aranges
                   0x000030         0x18 build/default/production/IOs.o
+ .debug_aranges
+                  0x000048         0x18 build/default/production/delay_s.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -685,35 +698,41 @@ OUTPUT(dist/default/production/Driver3.X.production.elf elf32-pic30)
 LOAD default_isr
 
 .debug_pubtypes
-                  0x000048        0x182
+                  0x000060        0x1fa
  .debug_pubtypes
-                  0x000048         0x7a build/default/production/ChangeClk.o
+                  0x000060         0x7a build/default/production/ChangeClk.o
  .debug_pubtypes
-                  0x0000c2         0x12 build/default/production/main.o
+                  0x0000da         0x12 build/default/production/main.o
  .debug_pubtypes
-                  0x0000d4         0xf6 build/default/production/IOs.o
+                  0x0000ec         0xf6 build/default/production/IOs.o
+ .debug_pubtypes
+                  0x0001e2         0x78 build/default/production/delay_s.o
 
 __c30_signature
-                  0x0001ca         0x1e
+                  0x00025a         0x24
  __c30_signature
-                  0x0001ca          0x6 build/default/production/ChangeClk.o
+                  0x00025a          0x6 build/default/production/ChangeClk.o
  __c30_signature
-                  0x0001d0          0x6 build/default/production/main.o
+                  0x000260          0x6 build/default/production/main.o
  __c30_signature
-                  0x0001d6          0x6 build/default/production/IOs.o
+                  0x000266          0x6 build/default/production/IOs.o
  __c30_signature
-                  0x0001dc          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x00026c          0x6 build/default/production/delay_s.o
  __c30_signature
-                  0x0001e2          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000272          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+ __c30_signature
+                  0x000278          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
 .config_FCKSM     0xf80008          0x2
  .config_FCKSM    0xf80008          0x2 build/default/production/main.o
 
-.text             0x0002ce         0xee
- .text            0x0002ce         0x74 build/default/production/ChangeClk.o
-                  0x0002ce                  _NewClk
- .text            0x000342         0x6e build/default/production/IOs.o
-                  0x000342                  _IOinit
-                  0x00035a                  _CheckPushButtons
- .text            0x0003b0          0xc build/default/production/main.o
-                  0x0003b0                  _main
+.text             0x0002ce        0x178
+ .text            0x0002ce         0xca build/default/production/IOs.o
+                  0x0002ce                  _IOinit
+                  0x0002e6                  _CheckPushButtons
+ .text            0x000398         0x74 build/default/production/ChangeClk.o
+                  0x000398                  _NewClk
+ .text            0x00040c         0x2e build/default/production/delay_s.o
+                  0x00040c                  _delay_s
+ .text            0x00043a          0xc build/default/production/main.o
+                  0x00043a                  _main
