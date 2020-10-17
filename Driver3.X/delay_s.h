@@ -4,9 +4,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-    
+void T2Init (void);
 void delay_s (int t);
-
+        
 #ifdef	__cplusplus
 }
 #endif

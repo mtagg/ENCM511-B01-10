@@ -25,26 +25,26 @@
 
 
 // MACROS for Idle, Sleep modes
-#define Nop()    {__asm__ volatile ("nop");}
-#define ClrWdt() {__asm__ volatile ("clrwdt");}
-#define Sleep()  {__asm__ volatile ("pwrsav #0");}   //Sleep() - put MCU in sleep mode - CPU and some peripherals off
-#define Idle()   {__asm__ volatile ("pwrsav #1");}    //Idle() - put MCU in idle mode - only CPU off
-#define dsen()   {__asm__ volatile ("BSET DSCON, #15");} //
+#define Nop()    {__asm__ volatile ("nop");}                //nop -- useful for managing switching tasks
+#define ClrWdt() {__asm__ volatile ("clrwdt");}             //clear watch dog timer??????
+#define Sleep()  {__asm__ volatile ("pwrsav #0");}          //Sleep() - put MCU in sleep mode - CPU and some peripherals off
+#define Idle()   {__asm__ volatile ("pwrsav #1");}          //Idle() - put MCU in idle mode - only CPU off
+#define dsen()   {__asm__ volatile ("BSET DSCON, #15");}    //deep sleep enable
 
-//MAIN
+
 int main(void) {
      
     // Change Clock
-     NewClk(32); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
+    NewClk(32); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
      
-   // Initialize IOs for low-power wake-up
-     IOinit();
-     
-    while(1)
-    {
-        CheckPushButtons();
+    // Initialize IOs for low-power wake-up
+    IOinit();    
+    
+    // Initialize T2 static settings for delay function
+    T2Init();
+    
+    while(1){
+        IOcheck();
     }
-    
-    
     return 1;
 }

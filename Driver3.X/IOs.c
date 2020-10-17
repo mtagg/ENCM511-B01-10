@@ -2,10 +2,7 @@
 #include "IOs.h"
 #include "delay_s.h"
 
-
 void IOinit(void){
-    
-    //same as driver 2 setup
     
     AD1PCFG = 0xFFFF;            // set all analog pins as digital 
     TRISBbits.TRISB4 = 1;        // set RB4 to digi input
@@ -19,36 +16,35 @@ void IOinit(void){
     
 }
 
-void CheckPushButtons(void){
-       
-    if (PORTAbits.RA4 == 0){ //RA4 button switched to ground       
-        	LATBbits.LATB8 = 1;             // LED output on
-            delay_s(1);                     // 1 second delay 
-                while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){}
-                //will pause with LED on if 2 or more buttons pressed
-        	LATBbits.LATB8 = 0;             // LED output off once again
-            delay_s(1);                  
-	}else
-	if (PORTAbits.RA2 == 0){                // RA2 button switched to ground
-        	LATBbits.LATB8 = 1;             // Turns on led connected to RB8
-        	delay_s(3);                     // 3 second delay
-                while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){}
-                //will pause with LED on if 2 or more buttons pressed
-        	LATBbits.LATB8 = 0;             // turns off led connected to RB8
-            delay_s(3);      	
-    }else 
-	if (PORTBbits.RB4 == 0){                // RB4 button switched to ground	
-        	LATBbits.LATB8 = 1;             // Turns on led connected to RB8
-        	delay_s(2);                     // 2 second delay
-                while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){}
-                //will pause with LED on if 2 or more buttons pressed
-        	LATBbits.LATB8 = 0;             // turns off led connected to RB8
-            delay_s(2);      
-	}else{
-            LATBbits.LATB8 = 0;//LED output off by default - no buttons pressed
-            return;
+void IOcheck(void){
+    
+    while (PORTAbits.RA4 == 0){                           //RA4 button switched to ground 
+        	LATBbits.LATB8 = ~LATBbits.LATB8;             // LED output toggle
+            delay_s(1);                                   // 1 second delay 
+                while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){
+                        LATBbits.LATB8 = 1;  
+                }//pause with LED on while 2 or more buttons pressed
+
+    }   
+    while (PORTAbits.RA2 == 0){                           // RA2 button switched to ground
+        	LATBbits.LATB8 = ~LATBbits.LATB8;             // LED output toggle
+        	delay_s(3);                                   // 3 second delay
+                while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){
+                        LATBbits.LATB8 = 1;  
+                }//pause with LED on while 2 or more buttons pressed
+   
+    } 
+	while (PORTBbits.RB4 == 0){                           // RB4 button switched to ground	
+        	LATBbits.LATB8 = ~LATBbits.LATB8;             // LED output toggle
+        	delay_s(2);                                   // 2 second delay
+                while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){
+                        LATBbits.LATB8 = 1;  
+                }//pause with LED on while 2 or more buttons pressed
+            
+	
     }
     
+    LATBbits.LATB8 = 0;//LED output off by default - no buttons pressed
+    return;
+     
 }
-
-
