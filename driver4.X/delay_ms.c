@@ -1,4 +1,4 @@
-#include "delay_s.h"
+#include "delay_ms.h"
 #include <xc.h>
 
 void T2Init (void){
@@ -8,9 +8,8 @@ void T2Init (void){
         T2CONbits.TCS = 0;       // use internal clock source for timer2
         return;
 }
-void delay_s (int t){
+void delay_ms (int t){
 
-//START Delay Code
     //1: Clock previously set to 32kHz
     //2:        --  timer2 settings
         T2CONbits.TON = 1;       // start 16bit timer2
@@ -22,11 +21,10 @@ void delay_s (int t){
         IEC0bits.T2IE = 1;       // enable T2 interrupts
         IFS0bits.T2IF = 0;       // clear T2 interrupt flag - in case of previous flag set
     //5:        --  set PR2 to work with pre-scaler for 1s base delay multiplied by input argument
-        PR2 = 16000 * t;           //16000 * 2Period = 1second 
+        PR2 = 16*t;           //16000 * 2Period = 1second 
     //6:        --  chose what to do whilst waiting for timer to get interrupted by PR2 value
         Idle();
     //7:        -- MCU exits Idle after PR2 == TMR2 and Performs timer2 interrupt sub-routine
-//END Delay Code  
     return;
 }
 

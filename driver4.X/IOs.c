@@ -1,6 +1,6 @@
 #include <xc.h>
 #include "IOs.h"
-#include "delay_s.h"
+#include "delay_ms.h"
 
 void IOinit(void){
     
@@ -20,26 +20,30 @@ void IOcheck(void){
     
     while (PORTAbits.RA4 == 0){                           //RA4 button switched to ground 
         	LATBbits.LATB8 = ~LATBbits.LATB8;             // LED output toggle
-            delay_s(1);                                   // 1 second delay 
+            delay_ms(500);                                   // 1 second delay 
                 while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){
                         LATBbits.LATB8 = 1;  
                 }//pause with LED on while 2 or more buttons pressed
+    //ADD UART DISPLAY CODE FOR DRIVER 4
     }   
     while (PORTAbits.RA2 == 0){                           // RA2 button switched to ground
         	LATBbits.LATB8 = ~LATBbits.LATB8;             // LED output toggle
-        	delay_s(3);                                   // 3 second delay
-                while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){
-                        LATBbits.LATB8 = 1;  
-                }//pause with LED on while 2 or more buttons pressed   
-    } 
-	while (PORTBbits.RB4 == 0){                           // RB4 button switched to ground	
-        	LATBbits.LATB8 = ~LATBbits.LATB8;             // LED output toggle
-        	delay_s(2);                                   // 2 second delay
+        	delay_ms(3000);                                   // 3 second delay
                 while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){
                         LATBbits.LATB8 = 1;  
                 }//pause with LED on while 2 or more buttons pressed
+    //ADD UART DISPLAY CODE FOR DRIVER 4  
     } 
-    LATBbits.LATB8 = 0;//LED output off by default - no buttons pressed
+	while (PORTBbits.RB4 == 0){                           // RB4 button switched to ground	
+        	LATBbits.LATB8 = ~LATBbits.LATB8;             // LED output toggle
+        	delay_ms(2000);                                   // 2 second delay
+                while ((PORTAbits.RA2 + PORTAbits.RA4 + PORTBbits.RB4) < 2){
+                        LATBbits.LATB8 = 1;  
+                }//pause with LED on while 2 or more buttons pressed
+    //ADD UART DISPLAY CODE FOR DRIVER 4
+    } 
+        LATBbits.LATB8 = 0;//LED output off by default - no buttons pressed
+    //ADD UART DISPLAY CODE FOR DRIVER 4
     return;
      
 }

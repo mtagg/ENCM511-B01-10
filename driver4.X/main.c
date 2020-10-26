@@ -23,7 +23,7 @@
 
 // User header files
 #include "IOs.h"
-#include "delay_s.h"
+#include "delay_ms.h"
 #include "ChangeClk.h"
 
 
