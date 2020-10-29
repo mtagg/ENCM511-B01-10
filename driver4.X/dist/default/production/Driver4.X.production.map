@@ -117,10 +117,11 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x864           0xc96  (3222)
-.text                        0xa64               0x396           0x561  (1377)
-.dinit                       0xdfa                 0xe            0x15  (21)
+.const                       0xa64                0xa6            0xf9  (249)
+.text                        0xb0a               0x44c           0x672  (1650)
+.dinit                       0xf56                 0xe            0x15  (21)
 
-                 Total "program" memory used (bytes):         0x120c  (4620) 28%
+                 Total "program" memory used (bytes):         0x1416  (5142) 31%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -191,31 +192,31 @@ External Symbols in Program Memory (by address):
                   0x0009ba                  ___mulsf3
                   0x000a22                  __fcompare
                   0x000a58                  _strlen
-                  0x000a64                  _InitUART2
-                  0x000acc                  _XmitUART2
-                  0x000b04                  _Disp2Hex
-                  0x000b62                  _Disp2Hex32
-                  0x000bd0                  _Disp2Dec
-                  0x000c30                  _Disp2String
-                  0x000c52                  _IOinit
-                  0x000c6a                  _IOcheck
-                  0x000d50                  _NewClk
-                  0x000dc4                  _T2Init
-                  0x000dd0                  _delay_ms
-                  0x000dec                  _main
+                  0x000b0a                  _InitUART2
+                  0x000b72                  _XmitUART2
+                  0x000baa                  _Disp2Hex
+                  0x000c08                  _Disp2Hex32
+                  0x000c76                  _Disp2Dec
+                  0x000cd6                  _Disp2String
+                  0x000cf8                  _IOinit
+                  0x000d10                  _IOcheck
+                  0x000ea4                  _NewClk
+                  0x000f18                  _T2Init
+                  0x000f24                  _delay_ms
+                  0x000f48                  _main
 
 External Symbols in Program Memory (by name):
 
-                  0x000bd0                  _Disp2Dec
-                  0x000b04                  _Disp2Hex
-                  0x000b62                  _Disp2Hex32
-                  0x000c30                  _Disp2String
-                  0x000c6a                  _IOcheck
-                  0x000c52                  _IOinit
-                  0x000a64                  _InitUART2
-                  0x000d50                  _NewClk
-                  0x000dc4                  _T2Init
-                  0x000acc                  _XmitUART2
+                  0x000c76                  _Disp2Dec
+                  0x000baa                  _Disp2Hex
+                  0x000c08                  _Disp2Hex32
+                  0x000cd6                  _Disp2String
+                  0x000d10                  _IOcheck
+                  0x000cf8                  _IOinit
+                  0x000b0a                  _InitUART2
+                  0x000ea4                  _NewClk
+                  0x000f18                  _T2Init
+                  0x000b72                  _XmitUART2
                   0x0002e2                  __DefaultInterrupt
                   0x0002d8                  __T2Interrupt
                   0x0002c8                  __U2RXInterrupt
@@ -248,11 +249,11 @@ External Symbols in Program Memory (by name):
                   0x000422                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000dd0                  _delay_ms
+                  0x000f24                  _delay_ms
                   0x0006ee                  _expf
                   0x0008c8                  _ldexpf
                   0x00090c                  _logf
-                  0x000dec                  _main
+                  0x000f48                  _main
                   0x000452                  _powf
                   0x000a58                  _strlen
 
@@ -447,13 +448,13 @@ __FDS
  .debug_abbrev    0x00026d         0xd0 build/default/production/IOs.o
  .debug_abbrev    0x00033d         0xeb build/default/production/delay_ms.o
 
-.debug_line       0x000000        0x52d
+.debug_line       0x000000        0x544
  *(.debug_line)
  .debug_line      0x000000        0x11b build/default/production/ChangeClk.o
  .debug_line      0x00011b        0x183 build/default/production/UART2.o
  .debug_line      0x00029e         0x38 build/default/production/main.o
- .debug_line      0x0002d6        0x12d build/default/production/IOs.o
- .debug_line      0x000403        0x12a build/default/production/delay_ms.o
+ .debug_line      0x0002d6        0x142 build/default/production/IOs.o
+ .debug_line      0x000418        0x12c build/default/production/delay_ms.o
 
 .debug_frame      0x000000        0x1f2
  *(.debug_frame)
@@ -1016,24 +1017,27 @@ __c30_signature
  .ivt._T2Interrupt
                   0x000022          0x2 build/default/production/delay_ms.o
 
-.text             0x000a64        0x396
- .text            0x000a64        0x1ee build/default/production/UART2.o
-                  0x000a64                  _InitUART2
-                  0x000acc                  _XmitUART2
-                  0x000b04                  _Disp2Hex
-                  0x000b62                  _Disp2Hex32
-                  0x000bd0                  _Disp2Dec
-                  0x000c30                  _Disp2String
- .text            0x000c52         0xfe build/default/production/IOs.o
-                  0x000c52                  _IOinit
-                  0x000c6a                  _IOcheck
- .text            0x000d50         0x74 build/default/production/ChangeClk.o
-                  0x000d50                  _NewClk
- .text            0x000dc4         0x28 build/default/production/delay_ms.o
-                  0x000dc4                  _T2Init
-                  0x000dd0                  _delay_ms
- .text            0x000dec          0xe build/default/production/main.o
-                  0x000dec                  _main
+.const              0x8a64         0xa6 load address 0x000a64  
+ .const             0x8a64         0xa6 build/default/production/IOs.o
 
-.dinit            0x000dfa          0xe
- .dinit           0x000dfa          0xe data_init
+.text             0x000b0a        0x44c
+ .text            0x000b0a        0x1ee build/default/production/UART2.o
+                  0x000b0a                  _InitUART2
+                  0x000b72                  _XmitUART2
+                  0x000baa                  _Disp2Hex
+                  0x000c08                  _Disp2Hex32
+                  0x000c76                  _Disp2Dec
+                  0x000cd6                  _Disp2String
+ .text            0x000cf8        0x1ac build/default/production/IOs.o
+                  0x000cf8                  _IOinit
+                  0x000d10                  _IOcheck
+ .text            0x000ea4         0x74 build/default/production/ChangeClk.o
+                  0x000ea4                  _NewClk
+ .text            0x000f18         0x30 build/default/production/delay_ms.o
+                  0x000f18                  _T2Init
+                  0x000f24                  _delay_ms
+ .text            0x000f48          0xe build/default/production/main.o
+                  0x000f48                  _main
+
+.dinit            0x000f56          0xe
+ .dinit           0x000f56          0xe data_init

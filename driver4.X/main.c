@@ -8,7 +8,7 @@
 // MPLAB header libraries
 
 /*
- * Useful URL's so far:
+ * Useful URL's for understanding timer implementation:
  *      https://microchipdeveloper.com/pickit3:configuration-options
  *      https://microchipdeveloper.com/faq:77
  *      https://www.google.com/search?q=what+does+__attribute__+mean&rlz=1C1CHBF_enCA879CA879&oq=what+does+__attribute__+mean&aqs=chrome..69i57j0l7.5798j0j7&sourceid=chrome&ie=UTF-8
@@ -25,6 +25,7 @@
 #include "IOs.h"
 #include "delay_ms.h"
 #include "ChangeClk.h"
+#include "UART2.h"
 
 
 //Preprocessor directives - Configuration bits for MCU start up
@@ -42,13 +43,15 @@
 int main(void) {
      
     // Change Clock
-    NewClk(32); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
+    NewClk(500); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
      
     // Initialize IOs for low-power wake-up
     IOinit();    
     
     // Initialize T2 static settings for delay function
     T2Init();
+    
+    // Initialize UART - built in to UART2.c
     
     while(1){
         IOcheck();
