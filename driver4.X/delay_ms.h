@@ -4,6 +4,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+
+    
+
 void T2Init (void);
 void delay_ms (int t);
 void __attribute__ ((interrupt,no_auto_psv)) _T2Interrupt(void);

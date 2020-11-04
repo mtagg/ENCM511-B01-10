@@ -22,6 +22,7 @@
       <itemPath>IOs.h</itemPath>
       <itemPath>delay_ms.c</itemPath>
       <itemPath>delay_ms.h</itemPath>
+      <itemPath>MACROS.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

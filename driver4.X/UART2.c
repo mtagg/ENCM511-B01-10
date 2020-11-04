@@ -79,7 +79,7 @@ void InitUART2(void)
     
 	IEC1bits.U2TXIE = 1;	// Enable Transmit Interrupts
 	IFS1bits.U2RXIF = 0;	// Clear the Recieve Interrupt Flag
-	IPC7bits.U2RXIP = 4; //UART2 Rx interrupt has 2nd highest priority
+	IPC7bits.U2RXIP = 4;    // UART2 Rx interrupt has 2nd highest priority
     IEC1bits.U2RXIE = 0;	// Disable Recieve Interrupts
 
 	U2MODEbits.UARTEN = 1;	// And turn the peripheral on
@@ -96,13 +96,13 @@ void InitUART2(void)
 
 void XmitUART2(char CharNum, unsigned int repeatNo)
 {	
+	InitUART2();            //Initialize UART2 module and turn it on
 	
-	InitUART2();	//Initialize UART2 module and turn it on
 	while(repeatNo!=0) 
 	{
 		while(U2STAbits.UTXBF==1)	//Just loop here till the FIFO buffers have room for one more entry
 		{
-			// Idle();  //commented to try out serialplot app
+			// Idle();  //commented to try out serial plot app
 		}	
 		U2TXREG=CharNum;	//Move Data to be displayed in UART FIFO buffer
 		repeatNo--;
@@ -209,16 +209,26 @@ void Disp2Dec(uint16_t Dec_num)
 
 void Disp2String(char *str) //Displays String of characters
 {
-    unsigned int i;
+    if (strlen(str) < 2){ 
+        XmitUART2(*str,1);  //print last char             
+    }
+    else{
+        XmitUART2(*str,1); //print current index
+        Disp2String(str+1); //send string starting at next char
+    }return;
+     
+    
    // XmitUART2(0x0A,2);  //LF
    // XmitUART2(0x0D,1);  //CR 
-    for (i=0; i<= strlen(str); i++)
-    {
-          
-        XmitUART2(str[i],1);
-    }
+
+//    unsigned int i;
+//    for (i=0; i<= strlen(str); i++)
+//    {
+//          
+//        XmitUART2(str[i],1);
+//    }
     // XmitUART2(0x0A,2);  //LF
     // XmitUART2(0x0D,1);  //CR 
     
-    return;
+    //return;
 }
