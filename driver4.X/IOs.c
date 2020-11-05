@@ -36,7 +36,6 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
     if (IFS1bits.CNIF == 1){ 
         StopBlink = 1;
         IFS1bits.CNIF = 0;      //clear CN interrupt flag bit
-        
         Nop();
         
 
