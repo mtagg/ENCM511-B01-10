@@ -1,6 +1,8 @@
 build/default/production/main.o:  \
 main.c  \
 IOs.h  \
-ChangeClk.h  \
+itoa.h  \
 timers.h  \
- UART2.h 
+MACROS.h  \
+ UART2.h  \
+ChangeClk.h 

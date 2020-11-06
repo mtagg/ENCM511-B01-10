@@ -1,6 +1,12 @@
 #ifndef DELAY_S_H
 #define	DELAY_S_H
 
+#include "xc.h"
+#include "itoa.h"
+#include "IOs.h"
+#include "MACROS.h"
+#include "UART2.h"
+
 #ifdef	__cplusplus
 extern "C" {
 #endif

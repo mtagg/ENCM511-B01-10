@@ -1,17 +1,10 @@
-#include "xc.h"
-#include "stdlib.h"
-#include "string.h"
 #include "IOs.h"
-#include "timers.h"
-#include "UART2.h"
-#include "MACROS.h"
 
-
-
-uint16_t MINS;
-uint16_t SECS;
-char Mbuff[2];
-char Sbuff[2];
+uint8_t MINS;
+uint8_t SECS;
+char *Mbuff;
+char *Sbuff;
+char DispBuffer[20]; //used to hold the message strings sent to UART display -- there are 2 extra spaces included
 
 void IOinit(void){
 
@@ -33,6 +26,17 @@ void IOinit(void){
     IEC1bits.CNIE = 1;            // CN interrupt requests enabled
     IFS1bits.CNIF = 0;            // clear T2 interrupt flag - because you never know?
     
+//UART message string init:
+    //            Disp2String("\r" + Mbuff + "m : " + Sbuff + "s        ");
+    DispBuffer[0] = '\n';
+    //DispBuffer[1,2]  = Mbuff
+    DispBuffer[3] = 'm';
+    DispBuffer[4] = ' ';
+    DispBuffer[5] = ':';
+    DispBuffer[6] = ' ';
+    //DispBuffer[7,8] = Sbuff
+    DispBuffer[9] = 's';
+    //DispBuffer[9,10,11,12,13,14,15,16] = ' '+' '+' '+' '+' '+' '+' '+' '+ OR " --ALARM";
     return; 
 }
 
@@ -47,9 +51,9 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
                 
         while(PB1 == 0 && PB2+PB3 == 2 && MINS < 59){
             MINS++;
-            itoa(MINS, Mbuff, 10);
-            itoa(SECS, Sbuff, 10);
-            Disp2String("\r" + Mbuff + "m : " + Sbuff + "s         ");
+            Mbuff = itoa(MINS);
+            Sbuff = itoa(SECS);
+            //Disp2String("\r" + Mbuff + "m : " + Sbuff + "s         ");
 //            Disp2String("\r");
 //            Disp2Dec(MINS);
 //            Disp2String("m : ");
@@ -59,9 +63,10 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
         }
         while(PB2 == 0 && PB1+PB3 == 2 && SECS < 59){
             SECS++;
-            itoa(MINS, Mbuff, 10);
-            itoa(SECS, Sbuff, 10);
-            Disp2String("\r" + Mbuff + "m : " + Sbuff + "s         ");
+            Mbuff = itoa(MINS);
+            Sbuff = itoa(SECS);
+            //DispBuffer
+            //Disp2String("\r" + Mbuff + "m : " + Sbuff + "s        ");
 //            Disp2String("\r");
 //            Disp2Dec(MINS);
 //            Disp2String("m : ");

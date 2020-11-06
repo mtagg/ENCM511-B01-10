@@ -1,9 +1,3 @@
-/*
- * File:   main.c
- * Author: Rushi V
- *
- * Created on September 26, 2020, 9:17 PM
- */
 // MPLAB header libraries
 #include <xc.h>
 
@@ -32,11 +26,11 @@
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
 
 
-extern uint16_t MINS;
-extern uint16_t SECS; 
-extern char Mbuff[2];
-extern char Sbuff[2];
-
+extern uint8_t MINS;
+extern uint8_t SECS;
+extern char *Mbuff;
+extern char *Sbuff;
+extern char DispBuffer[20];
 
 //MAIN
 int main(void) {

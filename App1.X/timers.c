@@ -1,16 +1,10 @@
-#include <xc.h>
-#include <stdlib.h>
-#include <string.h>
 #include "timers.h"
-#include "MACROS.h"
-//#include "IOs.h"
-//#include "ChangeClk.h"
-#include "UART2.h"
 
-extern uint16_t MINS;
-extern uint16_t SECS;
-extern char Mbuff[2];
-extern char Sbuff[2];
+extern uint8_t MINS;
+extern uint8_t SECS;
+extern char *Mbuff;
+extern char *Sbuff;
+extern char DispBuffer[20];
 
 void T2Init (void){
 
@@ -61,9 +55,10 @@ void __attribute__ ((interrupt,no_auto_psv)) _T3Interrupt(void){
         IFS0bits.T3IF = 0;
         MINS = 0;
         SECS = 0;
-        itoa(MINS, Mbuff, 10);
-        itoa(SECS, Sbuff, 10);
-        Disp2String("\r" + Mbuff + "m : " + Sbuff + "s         ");
+        Mbuff = itoa(MINS);
+        Sbuff = itoa(SECS);
+        //DispBuffer
+        //Disp2String("\r" + Mbuff + "m : " + Sbuff + "s         ");
 //        Disp2String("\r");
 //        Disp2Dec(MINS);
 //        Disp2String("m : ");
