@@ -2,9 +2,10 @@
 
 uint8_t MINS;
 uint8_t SECS;
-char *Mbuff;
-char *Sbuff;
-char DispBuffer[20]; //used to hold the message strings sent to UART display -- there are 2 extra spaces included
+uint8_t Increment;
+uint8_t RESET;
+uint8_t SET;
+
 
 void IOinit(void){
 
@@ -26,21 +27,24 @@ void IOinit(void){
     IEC1bits.CNIE = 1;            // CN interrupt requests enabled
     IFS1bits.CNIF = 0;            // clear T2 interrupt flag - because you never know?
     
-//UART message string init:
-    //            Disp2String("\r" + Mbuff + "m : " + Sbuff + "s        ");
-    DispBuffer[0] = '\n';
-    //DispBuffer[1,2]  = Mbuff
-    DispBuffer[3] = 'm';
-    DispBuffer[4] = ' ';
-    DispBuffer[5] = ':';
-    DispBuffer[6] = ' ';
-    //DispBuffer[7,8] = Sbuff
-    DispBuffer[9] = 's';
-    //DispBuffer[9,10,11,12,13,14,15,16] = ' '+' '+' '+' '+' '+' '+' '+' '+ OR " --ALARM";
-    return; 
+return; 
 }
 
+void setTime(char t){
+    LED_OFF;
+    T2CONbits.TON = 0;
+        if (t == 'r'){
+            MINS = 0;
+            SECS = 0;
+        }    
+        Disp2String("\r ");
+        Disp2Dec(MINS);
+        Disp2String("m");
+        Disp2String(" : ");
+        Disp2Dec(SECS);
+        Disp2String("s        "); 
 
+}
 
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
     
@@ -48,40 +52,28 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
     if (IFS1bits.CNIF == 1){ 
         IFS1bits.CNIF = 0;      //clear CN interrupt flag bit
         Nop();
-                
-        while(PB1 == 0 && PB2+PB3 == 2 && MINS < 59){
-            MINS++;
-            Mbuff = itoa(MINS);
-            Sbuff = itoa(SECS);
-            //Disp2String("\r" + Mbuff + "m : " + Sbuff + "s         ");
-//            Disp2String("\r");
-//            Disp2Dec(MINS);
-//            Disp2String("m : ");
-//            Disp2Dec(SECS);
-//            Disp2String("s         "); //extra spaces to clear any previous alarm messages
 
-        }
-        while(PB2 == 0 && PB1+PB3 == 2 && SECS < 59){
+        while (PB1 == 0 && PB2+PB3 == 2 && MINS < 59){
+            MINS++;
+            setTime('m');
+        } 
+
+        while (PB2 == 0 && PB1+PB3 == 2 && SECS < 59){
             SECS++;
-            Mbuff = itoa(MINS);
-            Sbuff = itoa(SECS);
-            //DispBuffer
-            //Disp2String("\r" + Mbuff + "m : " + Sbuff + "s        ");
-//            Disp2String("\r");
-//            Disp2Dec(MINS);
-//            Disp2String("m : ");
-//            Disp2Dec(SECS);
-//            Disp2String("s         "); //extra spaces to clear any previous alarm messages
-        
+            setTime('s');
         }
+
         if (PB3 == 0){
-            T2CONbits.TON = ~T2CONbits.TON; // toggles timer 2
             IFS0bits.T3IF = 0;              // clear T3 interrupt flag
             TMR3 = 0;                       // reset T3 to 0
             T3CONbits.TON = 1;              // start timer3, basically checking to see if its held for > 3s 
-        }else if (PB3 == 1){           
+            RESET = 0;
+       }
+        else if (PB3 == 1){           
             T3CONbits.TON = 0;              // Stop T3 to avoid clearing
-        }
-                 
+            if (RESET == 1 || T2CONbits.TON == 1){
+                T2CONbits.TON = 0; 
+            }else countdown();            
+        }            
     }
 }

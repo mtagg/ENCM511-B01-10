@@ -2,13 +2,12 @@
 #define	DELAY_S_H
 
 #include "xc.h"
-#include "itoa.h"
 #include "IOs.h"
 #include "MACROS.h"
-#include "UART2.h"
+
 
 #ifdef	__cplusplus
-extern "C" {
+extern "C" {#include "UART2.h"
 #endif
 
 void T2Init (void);

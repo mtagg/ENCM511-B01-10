@@ -1,3 +1,4 @@
 build/default/production/itoa.o:  \
 itoa.c  \
-itoa.h 
+itoa.h  \
+UART2.h 

@@ -28,9 +28,6 @@
 
 extern uint8_t MINS;
 extern uint8_t SECS;
-extern char *Mbuff;
-extern char *Sbuff;
-extern char DispBuffer[20];
 
 //MAIN
 int main(void) {

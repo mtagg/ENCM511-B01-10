@@ -2,9 +2,9 @@
 
 extern uint8_t MINS;
 extern uint8_t SECS;
-extern char *Mbuff;
-extern char *Sbuff;
-extern char DispBuffer[20];
+extern uint8_t Increment;
+extern uint8_t RESET;
+extern uint8_t SET;
 
 void T2Init (void){
 
@@ -19,7 +19,7 @@ void T2Init (void){
         IEC0bits.T2IE = 1;       // enable T2 interrupts
         IFS0bits.T2IF = 0;       // Timer2 Interrupt Flag clear
         IPC1 = 0xD000;           // T2 interrupt priority set to level 5
-        
+        PR2 = 16000;
         
         //T3 INIT:
         T3CONbits.TSIDL = 0;     // T3 timer may run in Idle
@@ -29,12 +29,31 @@ void T2Init (void){
         IFS0bits.T3IF = 0;       // clear T3 interrupt flag
         IPC2 = IPC2 | 0x5;       //T3 interrupt priority 6
         PR3  =  48000;           // 3 seconds on 32kHz T2 -> PR2 = 48000 (0xBB80))
-
+        RESET = 0;
+        
     return;
 }
 
 void countdown(void){
-
+    
+    //NewClk(32);
+    LED_ON;
+    IFS0bits.T2IF = 0;
+    IEC0bits.T2IE = 1;       // enable T2 interrupts
+    TMR2 = 0;
+    T2CONbits.TON = 1;
+    
+       
+    while (SECS > 0 || MINS > 0){
+        Idle();    
+    }
+    
+    
+    if (RESET == 0){
+        LED_ON;
+        setTime('r');
+        Disp2String(" --ALARM");
+    }
     return;
 }
 
@@ -42,31 +61,25 @@ void countdown(void){
 
 //Timer 2 Interrupt subroutine 
 void __attribute__ ((interrupt,no_auto_psv)) _T2Interrupt(void){
-    // T2 interrupt used for count-down functionality
-    // controls blinking LED & decrementing timer values
         if (IFS0bits.T2IF == 1){            // If timer interrupt occurs:
             IFS0bits.T2IF = 0;              // clear T2 interrupt flag to allow blinking
             TMR2 = 0;                       // restart T2
+            LED_TOGGLE;
+            if(SECS > 0){
+                SECS--;
+            }else if (MINS > 0){
+                MINS--;
+                SECS = 59;
+            }
         }
 }
 
 void __attribute__ ((interrupt,no_auto_psv)) _T3Interrupt(void){
-    if (IFS0bits.T3IF == 1){
+    if (IFS0bits.T3IF == 1){    
         IFS0bits.T3IF = 0;
-        MINS = 0;
-        SECS = 0;
-        Mbuff = itoa(MINS);
-        Sbuff = itoa(SECS);
-        //DispBuffer
-        //Disp2String("\r" + Mbuff + "m : " + Sbuff + "s         ");
-//        Disp2String("\r");
-//        Disp2Dec(MINS);
-//        Disp2String("m : ");
-//        Disp2Dec(SECS);
-//        Disp2String("s         "); //extra spaces to clear any previous alarm messages        
-//       
         T3CONbits.TON = 0;         // stop T3
-        TMR3 = 0;                  // reset T3 to 0
+        setTime('r');
+        RESET = 1;
         
     }   
 }
