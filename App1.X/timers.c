@@ -7,7 +7,10 @@ extern uint8_t RESET;
 extern uint8_t SET;
 
 void T2Init (void){
-
+    
+    //Initialize Timer Display:
+    setTime('r');
+    
     //Initialize Timers
     T2CONbits.T32 = 0;       // 16-bit timer mode on for T3 AND T2
             
@@ -34,28 +37,28 @@ void T2Init (void){
     return;
 }
 
-void countdown(void){
-    
-    //NewClk(32);
-    LED_ON;
-    IFS0bits.T2IF = 0;
-    IEC0bits.T2IE = 1;       // enable T2 interrupts
-    TMR2 = 0;
-    T2CONbits.TON = 1;
-    
-       
-    while (SECS > 0 || MINS > 0){
-        Idle();    
-    }
-    
-    
-    if (RESET == 0){
-        LED_ON;
-        setTime('r');
-        Disp2String(" --ALARM");
-    }
-    return;
-}
+//void countdown(void){
+//    
+//    //NewClk(32);
+//    //LED_ON;
+//    IFS0bits.T2IF = 0;
+//    //IEC0bits.T2IE = 1;       // enable T2 interrupts
+//    TMR2 = 0;
+//    T2CONbits.TON = 1;
+//    
+//       
+//    while (SECS > 0 || MINS > 0){
+//        Idle();    
+//    }
+//    
+//    
+////    if (RESET == 0){
+////        LED_ON;
+////        setTime('r');
+////        Disp2String(" --ALARM");
+////    }
+//    return;
+//}
 
 
 
@@ -71,15 +74,22 @@ void __attribute__ ((interrupt,no_auto_psv)) _T2Interrupt(void){
                 MINS--;
                 SECS = 59;
             }
+        }setTime('s');
+        if (SECS == 0 && MINS == 0){
+            LED_ON;
+            Disp2String(" --ALARM");
+            T2CONbits.TON = 0;
+            
         }
 }
-
+//Timer 3 Interrupt subroutine -- used for reset behavior
 void __attribute__ ((interrupt,no_auto_psv)) _T3Interrupt(void){
-    if (IFS0bits.T3IF == 1){    
-        IFS0bits.T3IF = 0;
+    if (IFS0bits.T3IF == 1){        
+        IFS0bits.T3IF = 0;         // reset T3 Flag     
         T3CONbits.TON = 0;         // stop T3
-        setTime('r');
-        RESET = 1;
+        T2CONbits.TON = 0;         // stop T2
+        setTime('r');              // reset time display
+        RESET = 1;                 // set "RESET" flag 
         
     }   
 }
