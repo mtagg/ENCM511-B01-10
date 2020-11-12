@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ChangeClk.c UART2.c main.c timers.c IOs.c itoa.c
+SOURCEFILES_QUOTED_IF_SPACED=ChangeClk.c UART2.c main.c timers.c IOs.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/main.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/IOs.o ${OBJECTDIR}/itoa.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ChangeClk.o.d ${OBJECTDIR}/UART2.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/IOs.o.d ${OBJECTDIR}/itoa.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/main.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/IOs.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ChangeClk.o.d ${OBJECTDIR}/UART2.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/IOs.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/main.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/IOs.o ${OBJECTDIR}/itoa.o
+OBJECTFILES=${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/main.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/IOs.o
 
 # Source Files
-SOURCEFILES=ChangeClk.c UART2.c main.c timers.c IOs.c itoa.c
+SOURCEFILES=ChangeClk.c UART2.c main.c timers.c IOs.c
 
 
 
@@ -130,13 +130,6 @@ ${OBJECTDIR}/IOs.o: IOs.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  IOs.c  -o ${OBJECTDIR}/IOs.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/IOs.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/IOs.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/itoa.o: itoa.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/itoa.o.d 
-	@${RM} ${OBJECTDIR}/itoa.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  itoa.c  -o ${OBJECTDIR}/itoa.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/itoa.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
-	@${FIXDEPS} "${OBJECTDIR}/itoa.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 else
 ${OBJECTDIR}/ChangeClk.o: ChangeClk.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -172,13 +165,6 @@ ${OBJECTDIR}/IOs.o: IOs.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/IOs.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  IOs.c  -o ${OBJECTDIR}/IOs.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/IOs.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/IOs.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
-${OBJECTDIR}/itoa.o: itoa.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/itoa.o.d 
-	@${RM} ${OBJECTDIR}/itoa.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  itoa.c  -o ${OBJECTDIR}/itoa.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/itoa.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
-	@${FIXDEPS} "${OBJECTDIR}/itoa.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

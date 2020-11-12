@@ -2,7 +2,6 @@
 
 extern uint8_t MINS;
 extern uint8_t SECS;
-extern uint8_t Increment;
 extern uint8_t RESET;
 extern uint8_t SET;
 
@@ -37,60 +36,43 @@ void T2Init (void){
     return;
 }
 
-//void countdown(void){
-//    
-//    //NewClk(32);
-//    //LED_ON;
-//    IFS0bits.T2IF = 0;
-//    //IEC0bits.T2IE = 1;       // enable T2 interrupts
-//    TMR2 = 0;
-//    T2CONbits.TON = 1;
-//    
-//       
-//    while (SECS > 0 || MINS > 0){
-//        Idle();    
-//    }
-//    
-//    
-////    if (RESET == 0){
-////        LED_ON;
-////        setTime('r');
-////        Disp2String(" --ALARM");
-////    }
-//    return;
-//}
-
 
 
 //Timer 2 Interrupt subroutine 
 void __attribute__ ((interrupt,no_auto_psv)) _T2Interrupt(void){
         if (IFS0bits.T2IF == 1){            // If timer interrupt occurs:
-            IFS0bits.T2IF = 0;              // clear T2 interrupt flag to allow blinking
+            LED_TOGGLE;   
             TMR2 = 0;                       // restart T2
-            LED_TOGGLE;
-            if(SECS > 0){
+            if (SECS == 0 && MINS == 0 && RESET == 0){
+                LED_ON;
+                setTime('a');
+                T2CONbits.TON = 0;
+            }else if(SECS > 0){
                 SECS--;
+                setTime('s');
             }else if (MINS > 0){
                 MINS--;
                 SECS = 59;
+                setTime('m');
             }
-        }setTime('s');
-        if (SECS == 0 && MINS == 0){
-            LED_ON;
-            Disp2String(" --ALARM");
-            T2CONbits.TON = 0;
-            
         }
+        IFS0bits.T2IF = 0;              // clear T2 interrupt flag to continue countdown 
 }
+
+
+
 //Timer 3 Interrupt subroutine -- used for reset behavior
 void __attribute__ ((interrupt,no_auto_psv)) _T3Interrupt(void){
     if (IFS0bits.T3IF == 1){        
-        IFS0bits.T3IF = 0;         // reset T3 Flag     
-        T3CONbits.TON = 0;         // stop T3
-        T2CONbits.TON = 0;         // stop T2
-        setTime('r');              // reset time display
-        RESET = 1;                 // set "RESET" flag 
-        
+            IFS0bits.T3IF = 0;         // reset T3 Flag     
+            T3CONbits.TON = 0;         // stop T3
+            T2CONbits.TON = 0;         // stop T2 
+            IEC0bits.T2IE = 0;         // stop T2 interrupts 
+            TMR2 = 0;                  
+            LED_OFF;
+            setTime('r');              // reset time display
+            RESET = 1;                 // set "RESET" flag 
+
     }   
 }
     

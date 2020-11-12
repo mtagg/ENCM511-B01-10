@@ -35,7 +35,7 @@ int main(void) {
     // Change Clock
      NewClk(32); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
   
-   // Initialize IOs
+   // Initialize all Registers and global variables
     IOinit();
     T2Init();
     MINS = 0;

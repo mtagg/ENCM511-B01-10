@@ -2,9 +2,8 @@
 
 uint8_t MINS;
 uint8_t SECS;
-uint8_t Increment;
 uint8_t RESET;
-uint8_t SET;
+uint8_t PB3FLAG;
 
 
 void IOinit(void){
@@ -32,16 +31,23 @@ return;
 }
 
 void setTime(char t){
+    char *SUFFIX = "        ";
         if (t == 'r'){
             MINS = 0;
-            SECS = 0;
-        }    
+            SECS = 0;    
+        } 
+        else if (t == 'a'){
+            SUFFIX = " --ALARM";
+        }
+
         Disp2String("\r ");
         Disp2Dec(MINS);
         Disp2String("m");
         Disp2String(" : ");
         Disp2Dec(SECS);
-        Disp2String("s        "); 
+        Disp2String("s "); 
+        Disp2String(SUFFIX);
+        Disp2String("\r");
 
 }
 
@@ -49,12 +55,23 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
     
     
     if (IFS1bits.CNIF == 1){ 
-            IFS1bits.CNIF = 0;      //clear CN interrupt flag bit
+        IFS1bits.CNIF = 0;      //clear CN interrupt flag bit
+        Nop();
+        //IEC0bits.T2IE = 0;                       // disable T2 interrupts
+        
+            
+        //Setting timer
+            if (PB1 + PB2 < 2) {              // case where PB1 | PB2 pressed:
+                T2CONbits.TON = 0;               // Stop T2 timer   
+                TMR2 = 0;                        // restart T2 every new countdown
+                IFS0bits.T2IF = 0;               // clear T2 interrupt  
+                LED_OFF;                         // start with LED off 
+            }
             
         //Increment minutes
             while (PB1 == 0  && MINS < 59){
                 MINS++;
-                setTime('s');
+                setTime('m');
             } 
         //Increment seconds
             while (PB2 == 0 && SECS < 59){
@@ -63,30 +80,36 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
             }
         //Start Reset Timer
             if (PB3 == 0){
-                SET = 1;                        // PB3 pressed flag
+                PB3FLAG = 1;                    // PB3 pressed flag
+            
+            //T3 Setup for reset    
                 IFS0bits.T3IF = 0;              // clear T3 interrupt flag
                 TMR3 = 0;                       // reset T3 to 0
                 T3CONbits.TON = 1;              // start timer3, basically checking to see if its held for > 3s 
                 RESET = 0;
            }
         //Countdown Start/Stop & Stop Reset Timer 
-            else if (PB3 == 1){    
-                T3CONbits.TON = 0;              // Stop T3 to avoid reset
-                if (RESET == 1){ 
-                        RESET = 0;              // If reset occurs, reset the reset flag :p
-                }   
-                else if (SET == 1){                 //PB3 flag was previously SET
-                    
-                    if (T2CONbits.TON == 1){        // Countdown on
-                        LED_OFF;                    //  
-                        T2CONbits.TON == 0;         // Stop Countdown 
-                    }
-                    else if (T2CONbits.TON == 0){   // Countdown off
-                        LED_ON;                     //
-                        TMR2 = 0;                   // reset T2 timer
-                        T2CONbits.TON = 1;           // Start Countdown
-                    }
-                }          
-            }    
-    }Nop();        
+            else if (PB3 == 1){ 
+                T3CONbits.TON = 0;              // Stop T3 to avoid reset 
+                if (PB3FLAG ==1){
+                //having held PB3 for 3s    
+                    if (RESET == 1){ 
+                            RESET = 0;              // If reset occurs, reset the reset flag :p
+                    }else {   
+                    //held PB3 less than 3s             
+                        if (T2CONbits.TON == 0){         // Countdown currently off
+                    //countdown start:
+                            IEC0bits.T2IE = 1;           // enable T2 interrupts
+                            IFS0bits.T2IF = 0;           // clear T2 interrupt flag
+                            T2CONbits.TSIDL = 0;     // keep timer operation during idle
+                            T2CONbits.TON = 1;           // Start Countdown
+                        }
+                        if (T2CONbits.TON == 1){         // Currently Counting down
+                    //stop/pause countdown:
+                            T2CONbits.TON = 0;           // Stop/pause Countdown                  
+                        }
+                    }         
+                }    
+            }
+    }
 }
