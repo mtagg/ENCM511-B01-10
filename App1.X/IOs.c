@@ -4,6 +4,7 @@ uint8_t MINS;
 uint8_t SECS;
 uint8_t RESET;
 uint8_t PB3FLAG;
+uint8_t ALARM;
 
 
 void IOinit(void){
@@ -31,21 +32,25 @@ return;
 }
 
 void setTime(char t){
-    char *SUFFIX = "        ";
+    char *SUFFIX = "";              // default suffix, will not clear alarm message
+    
         if (t == 'r'){
-            MINS = 0;
+            MINS = 0;               
             SECS = 0;    
-        } 
-        else if (t == 'a'){
-            SUFFIX = " --ALARM";
         }
-
+        if(ALARM == 1){             // There has been an alarm set
+            SUFFIX = "        ";    // suffix to write over the alarm
+            ALARM = 0;              // reset ALARM flag
+        }
+        else if (t == 'a'){         // Alarm to be set
+            SUFFIX = " --ALARM";    
+        }
         Disp2String("\r ");
         Disp2Dec(MINS);
         Disp2String("m");
-        Disp2String(" : ");
+        Disp2String(" :");
         Disp2Dec(SECS);
-        Disp2String("s "); 
+        Disp2String("s"); 
         Disp2String(SUFFIX);
         Disp2String("\r");
 
@@ -55,61 +60,53 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
     
     
     if (IFS1bits.CNIF == 1){ 
-        IFS1bits.CNIF = 0;      //clear CN interrupt flag bit
-        Nop();
-        //IEC0bits.T2IE = 0;                       // disable T2 interrupts
+        IEC0bits.T2IE = 0;                       // disable T2 interrupts
         
             
-        //Setting timer
-            if (PB1 + PB2 < 2) {              // case where PB1 | PB2 pressed:
+        //Behavior when user wants to change the countdown settings:
+            if (PB1 + PB2 < 2) {                 // PB1 OR PB2 pressed:
                 T2CONbits.TON = 0;               // Stop T2 timer   
                 TMR2 = 0;                        // restart T2 every new countdown
                 IFS0bits.T2IF = 0;               // clear T2 interrupt  
-                LED_OFF;                         // start with LED off 
+                LED_OFF;                         // start countdown with LED off 
             }
             
-        //Increment minutes
+        //Increment minutes - PB1 pressed/held:
             while (PB1 == 0  && MINS < 59){
                 MINS++;
                 setTime('m');
             } 
-        //Increment seconds
+        //Increment seconds - PB2 pressed/held:
             while (PB2 == 0 && SECS < 59){
                 SECS++;
                 setTime('s');        
             }
-        //Start Reset Timer
+        //Start the Reset Timer - PB3 pressed/held:
             if (PB3 == 0){
-                PB3FLAG = 1;                    // PB3 pressed flag
-            
-            //T3 Setup for reset    
+                PB3FLAG = 1;                    // set the PB3 flag for code below
                 IFS0bits.T3IF = 0;              // clear T3 interrupt flag
                 TMR3 = 0;                       // reset T3 to 0
-                T3CONbits.TON = 1;              // start timer3, basically checking to see if its held for > 3s 
-                RESET = 0;
+                T3CONbits.TON = 1;              // start timer3 to check for 3s hold 
+                RESET = 0;                      // Reset flag re-set
            }
-        //Countdown Start/Stop & Stop Reset Timer 
-            else if (PB3 == 1){ 
-                T3CONbits.TON = 0;              // Stop T3 to avoid reset 
-                if (PB3FLAG ==1){
-                //having held PB3 for 3s    
-                    if (RESET == 1){ 
-                            RESET = 0;              // If reset occurs, reset the reset flag :p
-                    }else {   
-                    //held PB3 less than 3s             
-                        if (T2CONbits.TON == 0){         // Countdown currently off
-                    //countdown start:
-                            IEC0bits.T2IE = 1;           // enable T2 interrupts
-                            IFS0bits.T2IF = 0;           // clear T2 interrupt flag
-                            T2CONbits.TSIDL = 0;     // keep timer operation during idle
-                            T2CONbits.TON = 1;           // Start Countdown
-                        }
-                        if (T2CONbits.TON == 1){         // Currently Counting down
-                    //stop/pause countdown:
-                            T2CONbits.TON = 0;           // Stop/pause Countdown                  
-                        }
-                    }         
-                }    
+        //PB3 released: 
+            else if (PB3 == 1){                 // observing PB3 has been pressed and released
+                T3CONbits.TON = 0;              // Timer 3 off any time PB3 is not pressed
+                
+                if (PB3FLAG == 1 && RESET == 0){          //held PB3 less than 3s 
+                    PB3FLAG = 0;
+                    
+                    if (T2CONbits.TON == 0){         // Countdown currently disabled
+                        IEC0bits.T2IE = 1;           // enable T2 interrupts
+                        IFS0bits.T2IF = 0;           // clear T2 interrupt flag
+                        T2CONbits.TON = 1;           // Start Countdown
+                    }
+                    else {                           //MCU currently counting down
+                        T2CONbits.TON = 0;           //pause Countdown                  
+                    }
+                }         
             }
+        IFS1bits.CNIF = 0;      //clear CN interrupt flag bit
+        Nop();    
     }
 }

@@ -21,7 +21,6 @@ extern "C" {
 #define PB1 PORTAbits.RA4
 #define PB2 PORTBbits.RB4
 #define PB3 PORTAbits.RA2
-//#define ALL3BUTTONS PORTAbits.RA4 + PORTBbits.RB4 + PORTAbits.RA2
 
 
 #ifdef	__cplusplus

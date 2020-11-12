@@ -70,21 +70,21 @@ Default Scalar Model: Small
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x27a           0x3b7  (951)
-.const                       0x47a                0x20            0x30  (48)
-.text                        0x49a               0x2f6           0x471  (1137)
-.dinit                       0x790                 0xe            0x15  (21)
+.text                        0x200               0x298           0x3e4  (996)
+.const                       0x498                0x20            0x30  (48)
+.text                        0x4b8               0x2fc           0x47a  (1146)
+.dinit                       0x7b4                 0xe            0x15  (21)
 
-                 Total "program" memory used (bytes):          0x86d  (2157) 13%
+                 Total "program" memory used (bytes):          0x8a3  (2211) 13%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0x6  (6)
+.nbss                        0x800                   0             0x8  (8)
 
-                 Total "data" memory used (bytes):            0x6  (6) <1%
+                 Total "data" memory used (bytes):            0x8  (8) <1%
 
 
 Dynamic Memory Usage
@@ -92,9 +92,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x806                               0x5fa  (1530)
+stack                        0x808                               0x5f8  (1528)
 
-                 Maximum dynamic memory (bytes):          0x5fa  (1530)
+                 Maximum dynamic memory (bytes):          0x5f8  (1528)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -105,15 +105,17 @@ External Symbols in Data Memory (by address):
                     0x0801                  _SECS
                     0x0802                  _RESET
                     0x0803                  _PB3FLAG
-                    0x0804                  _clkval
+                    0x0804                  _ALARM
+                    0x0806                  _clkval
 
 External Symbols in Data Memory (by name):
 
+                    0x0804                  _ALARM
                     0x0800                  _MINS
                     0x0803                  _PB3FLAG
                     0x0802                  _RESET
                     0x0801                  _SECS
-                    0x0804                  _clkval
+                    0x0806                  _clkval
 
 External Symbols in Program Memory (by address):
 
@@ -124,46 +126,46 @@ External Symbols in Program Memory (by address):
                   0x0002c8                  __U2RXInterrupt
                   0x0002d0                  __U2TXInterrupt
                   0x0002d8                  __T2Interrupt
-                  0x00035a                  __T3Interrupt
-                  0x000392                  __CNInterrupt
-                  0x000468                  __DefaultInterrupt
-                  0x00046e                  _strlen
-                  0x00049a                  _InitUART2
-                  0x000502                  _XmitUART2
-                  0x00053a                  _Disp2Hex
-                  0x000598                  _Disp2Hex32
-                  0x000606                  _Disp2Dec
-                  0x000640                  _Disp2String
-                  0x000662                  _NewClk
-                  0x0006d6                  _IOinit
-                  0x000700                  _setTime
-                  0x00074a                  _T2Init
-                  0x00077e                  _main
+                  0x000382                  __T3Interrupt
+                  0x0003ba                  __CNInterrupt
+                  0x000486                  __DefaultInterrupt
+                  0x00048c                  _strlen
+                  0x0004b8                  _InitUART2
+                  0x000520                  _XmitUART2
+                  0x000558                  _Disp2Hex
+                  0x0005b6                  _Disp2Hex32
+                  0x000624                  _Disp2Dec
+                  0x000658                  _Disp2String
+                  0x00067a                  _IOinit
+                  0x0006a4                  _setTime
+                  0x0006fa                  _NewClk
+                  0x00076e                  _T2Init
+                  0x0007a2                  _main
 
 External Symbols in Program Memory (by name):
 
-                  0x000606                  _Disp2Dec
-                  0x00053a                  _Disp2Hex
-                  0x000598                  _Disp2Hex32
-                  0x000640                  _Disp2String
-                  0x0006d6                  _IOinit
-                  0x00049a                  _InitUART2
-                  0x000662                  _NewClk
-                  0x00074a                  _T2Init
-                  0x000502                  _XmitUART2
-                  0x000392                  __CNInterrupt
-                  0x000468                  __DefaultInterrupt
+                  0x000624                  _Disp2Dec
+                  0x000558                  _Disp2Hex
+                  0x0005b6                  _Disp2Hex32
+                  0x000658                  _Disp2String
+                  0x00067a                  _IOinit
+                  0x0004b8                  _InitUART2
+                  0x0006fa                  _NewClk
+                  0x00076e                  _T2Init
+                  0x000520                  _XmitUART2
+                  0x0003ba                  __CNInterrupt
+                  0x000486                  __DefaultInterrupt
                   0x0002d8                  __T2Interrupt
-                  0x00035a                  __T3Interrupt
+                  0x000382                  __T3Interrupt
                   0x0002c8                  __U2RXInterrupt
                   0x0002d0                  __U2TXInterrupt
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x00077e                  _main
-                  0x000700                  _setTime
-                  0x00046e                  _strlen
+                  0x0007a2                  _main
+                  0x0006a4                  _setTime
+                  0x00048c                  _strlen
 
 Memory Configuration
 
@@ -217,7 +219,7 @@ LOAD d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x27a
+.text             0x000200        0x298
  *(.init)
  .init            0x000200         0x4c d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __resetPRI
@@ -232,23 +234,23 @@ LOAD d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libfx-elf.a
  .isr.text        0x0002c8         0x10 build/default/production/UART2.o
                   0x0002c8                  __U2RXInterrupt
                   0x0002d0                  __U2TXInterrupt
- .isr.text        0x0002d8         0xba build/default/production/timers.o
+ .isr.text        0x0002d8         0xe2 build/default/production/timers.o
                   0x0002d8                  __T2Interrupt
-                  0x00035a                  __T3Interrupt
- .isr.text        0x000392         0xd6 build/default/production/IOs.o
-                  0x000392                  __CNInterrupt
- .isr             0x000468          0x4 default_isr
-                  0x000468                  __DefaultInterrupt
+                  0x000382                  __T3Interrupt
+ .isr.text        0x0003ba         0xcc build/default/production/IOs.o
+                  0x0003ba                  __CNInterrupt
+ .isr             0x000486          0x4 default_isr
+                  0x000486                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x00046c          0x2 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
-                  0x00046c                  __crt_start_mode
-                  0x00046c                  __crt_start_mode_normal
- .libc.strlen     0x00046e          0xc d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a(strlen.XX_eo)
-                  0x00046e                  _strlen
+                  0x00048a          0x2 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
+                  0x00048a                  __crt_start_mode
+                  0x00048a                  __crt_start_mode_normal
+ .libc.strlen     0x00048c          0xc d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a(strlen.XX_eo)
+                  0x00048c                  _strlen
 
 usercode
  *(usercode)
@@ -280,13 +282,13 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x2f90
+.debug_info       0x000000       0x2fd1
  *(.debug_info)
  .debug_info      0x000000        0x54f build/default/production/ChangeClk.o
  .debug_info      0x00054f        0xe67 build/default/production/UART2.o
  .debug_info      0x0013b6        0x198 build/default/production/main.o
- .debug_info      0x00154e        0x82d build/default/production/timers.o
- .debug_info      0x001d7b       0x1215 build/default/production/IOs.o
+ .debug_info      0x00154e        0x84b build/default/production/timers.o
+ .debug_info      0x001d99       0x1238 build/default/production/IOs.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x4bb
@@ -297,13 +299,13 @@ __FDS
  .debug_abbrev    0x00028b         0xd6 build/default/production/timers.o
  .debug_abbrev    0x000361        0x15a build/default/production/IOs.o
 
-.debug_line       0x000000        0x5c5
+.debug_line       0x000000        0x5cd
  *(.debug_line)
  .debug_line      0x000000        0x11b build/default/production/ChangeClk.o
- .debug_line      0x00011b        0x180 build/default/production/UART2.o
- .debug_line      0x00029b         0x89 build/default/production/main.o
- .debug_line      0x000324        0x147 build/default/production/timers.o
- .debug_line      0x00046b        0x15a build/default/production/IOs.o
+ .debug_line      0x00011b        0x17f build/default/production/UART2.o
+ .debug_line      0x00029a         0x89 build/default/production/main.o
+ .debug_line      0x000323        0x14d build/default/production/timers.o
+ .debug_line      0x000470        0x15d build/default/production/IOs.o
 
 .debug_frame      0x000000        0x270
  *(.debug_frame)
@@ -327,7 +329,7 @@ __FDS
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x171
+                  0x000000        0x17b
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1d build/default/production/ChangeClk.o
@@ -338,7 +340,7 @@ __FDS
  .debug_pubnames
                   0x0000d0         0x3f build/default/production/timers.o
  .debug_pubnames
-                  0x00010f         0x62 build/default/production/IOs.o
+                  0x00010f         0x6c build/default/production/IOs.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -796,14 +798,15 @@ __c30_signature
  __c30_signature
                   0x00050b          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a(strlen.XX_eo)
 
-.nbss               0x0800          0x6
- .nbss              0x0800          0x4 build/default/production/IOs.o
+.nbss               0x0800          0x8
+ .nbss              0x0800          0x6 build/default/production/IOs.o
                     0x0800                  _MINS
                     0x0801                  _SECS
                     0x0802                  _RESET
                     0x0803                  _PB3FLAG
- .nbss              0x0804          0x2 build/default/production/UART2.o
-                    0x0804                  _clkval
+                    0x0804                  _ALARM
+ .nbss              0x0806          0x2 build/default/production/UART2.o
+                    0x0806                  _clkval
 
 .ivt._U2RXInterrupt
                   0x000050          0x2
@@ -833,26 +836,26 @@ __c30_signature
  .ivt._CNInterrupt
                   0x00003a          0x2 build/default/production/IOs.o
 
-.const              0x847a         0x20 load address 0x00047a  
- .const             0x847a         0x20 build/default/production/IOs.o
+.const              0x8498         0x20 load address 0x000498  
+ .const             0x8498         0x20 build/default/production/IOs.o
 
-.text             0x00049a        0x2f6
- .text            0x00049a        0x1c8 build/default/production/UART2.o
-                  0x00049a                  _InitUART2
-                  0x000502                  _XmitUART2
-                  0x00053a                  _Disp2Hex
-                  0x000598                  _Disp2Hex32
-                  0x000606                  _Disp2Dec
-                  0x000640                  _Disp2String
- .text            0x000662         0x74 build/default/production/ChangeClk.o
-                  0x000662                  _NewClk
- .text            0x0006d6         0x74 build/default/production/IOs.o
-                  0x0006d6                  _IOinit
-                  0x000700                  _setTime
- .text            0x00074a         0x34 build/default/production/timers.o
-                  0x00074a                  _T2Init
- .text            0x00077e         0x12 build/default/production/main.o
-                  0x00077e                  _main
+.text             0x0004b8        0x2fc
+ .text            0x0004b8        0x1c2 build/default/production/UART2.o
+                  0x0004b8                  _InitUART2
+                  0x000520                  _XmitUART2
+                  0x000558                  _Disp2Hex
+                  0x0005b6                  _Disp2Hex32
+                  0x000624                  _Disp2Dec
+                  0x000658                  _Disp2String
+ .text            0x00067a         0x80 build/default/production/IOs.o
+                  0x00067a                  _IOinit
+                  0x0006a4                  _setTime
+ .text            0x0006fa         0x74 build/default/production/ChangeClk.o
+                  0x0006fa                  _NewClk
+ .text            0x00076e         0x34 build/default/production/timers.o
+                  0x00076e                  _T2Init
+ .text            0x0007a2         0x12 build/default/production/main.o
+                  0x0007a2                  _main
 
-.dinit            0x000790          0xe
- .dinit           0x000790          0xe data_init
+.dinit            0x0007b4          0xe
+ .dinit           0x0007b4          0xe data_init
