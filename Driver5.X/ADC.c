@@ -1,6 +1,8 @@
 #include "ADC.h"
 
 void ADCinit(void){
+// Initialize CN interupt for AN5
+    //CNEN2bits.CN29IE = 1;               //enable CN interrupts for CN29 - RA3/pin8/AN5
     
 // configure ADC settings in AD1CON1 register
     AD1CON1bits.FORM = 0b00;          //set FORM bits to integer mode    
@@ -29,16 +31,10 @@ void ADCinit(void){
     
 }
 uint16_t do_ADC(void){    
-    AD1CON1bits.ADON = 1;            //ADC module on
-    
-    uint16_t ADCvalue;              //holds converted digital output
-    AD1CON2bits.BUFM = 0;           //buffer configured to 16-words
-
-    AD1CON1bits.ASAM = 0;             //sampling will start when SAMP set
-   
-    //unneeded?? MCU should clear status bit after conversion is finished
-    //AD1CON1bits.DONE = 1;             //ADC status bit
-
+    AD1CON1bits.ADON = 1;         //ADC module on
+    uint16_t ADCvalue;                //holds converted digital output
+    AD1CON2bits.BUFM = 0;             //buffer configured to 16-words
+    AD1CON1bits.ASAM = 0;             //sampling will start when SAMP set  
     
 //start sampling
     AD1CON1bits.SAMP = 1;           //starts sampling after SSRC and SAMC are set
@@ -50,10 +46,31 @@ uint16_t do_ADC(void){
 }
 
 void ADC_Display(uint16_t V){
+    //UART display function for ADC voltage
+    Disp2String("\r");          //return carriage
+    Disp2String(barGraph(V));   //determine & display those bars
+    Disp2Hex(V);                //Display the current voltage
+}
+
+char* barGraph(uint16_t V){
+    uint16_t v = V;
+    //takes a voltage between 0x0 and 0x3FF
+    //outputs a char (#) bar graph related to the voltage level with appropriate spacing
+    // 0x3FF V will have '|####################|'
+    static char graph[23];   
+    graph[0] = '|';
+    uint8_t i;
+    for (i=1; v > 50; i++){
+        v -= 50;
+        graph[i] = '#';
+    }
+    while (i < 21){     //graph empty space loop
+        graph[i++] = ' ';  
+    }
+    graph[i++] = '|';
+    graph[i] = '\0';
     
-    Disp2Hex(V);
-    Disp2String("\r");
-    
+    return graph;      //return string
 }
 
 

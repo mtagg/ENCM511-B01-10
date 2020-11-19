@@ -117,19 +117,20 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x85a           0xc87  (3207)
 .const                       0xa5a                 0x2             0x3  (3)
-.text                        0xa5c               0x2ee           0x465  (1125)
-.dinit                       0xd4a                 0xe            0x15  (21)
+.text                        0xa5c               0x354           0x4fe  (1278)
+.dinit                       0xdb0                0x14            0x1e  (30)
+.text                        0xdc4                 0xe            0x15  (21)
 
-                 Total "program" memory used (bytes):         0x1104  (4356) 27%
+                 Total "program" memory used (bytes):         0x11bb  (4539) 28%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0x4  (4)
+.nbss                        0x800                   0            0x1c  (28)
 
-                 Total "data" memory used (bytes):            0x4  (4) <1%
+                 Total "data" memory used (bytes):           0x1c  (28) 1%
 
 
 Dynamic Memory Usage
@@ -137,27 +138,27 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x804                               0x5fc  (1532)
+stack                        0x81c                               0x5e4  (1508)
 
-                 Maximum dynamic memory (bytes):          0x5fc  (1532)
+                 Maximum dynamic memory (bytes):          0x5e4  (1508)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _clkval
+                    0x0818                  _clkval
 
 External Symbols in Data Memory (by name):
 
-                    0x0800                  _clkval
+                    0x0818                  _clkval
 
 External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00023c                  __psv_init
-                  0x000252                  __data_init_standard
                   0x000252                  __data_init
+                  0x000252                  __data_init_standard
                   0x0002c8                  __U2RXInterrupt
                   0x0002d0                  __U2TXInterrupt
                   0x0002d8                  __DefaultInterrupt
@@ -177,9 +178,9 @@ External Symbols in Program Memory (by address):
                   0x00062a                  ___addsf3
                   0x0006e4                  _expf
                   0x0007a8                  __fchop
+                  0x0007f6                  ___eqsf2
                   0x0007f6                  ___ltsf2
                   0x0007f6                  ___lesf2
-                  0x0007f6                  ___eqsf2
                   0x0007fa                  ___gesf2
                   0x0007fa                  ___gtsf2
                   0x0007fe                  ___fixsfsi
@@ -199,8 +200,9 @@ External Symbols in Program Memory (by address):
                   0x000c4a                  _ADCinit
                   0x000c96                  _do_ADC
                   0x000cb8                  _ADC_Display
-                  0x000cc8                  _NewClk
-                  0x000d3c                  _main
+                  0x000cce                  _barGraph
+                  0x000d3c                  _NewClk
+                  0x000dc4                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -211,7 +213,7 @@ External Symbols in Program Memory (by name):
                   0x000b5a                  _Disp2Hex32
                   0x000c28                  _Disp2String
                   0x000a5c                  _InitUART2
-                  0x000cc8                  _NewClk
+                  0x000d3c                  _NewClk
                   0x000ac4                  _XmitUART2
                   0x0002d8                  __DefaultInterrupt
                   0x0002c8                  __U2RXInterrupt
@@ -244,11 +246,12 @@ External Symbols in Program Memory (by name):
                   0x000418                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
+                  0x000cce                  _barGraph
                   0x000c96                  _do_ADC
                   0x0006e4                  _expf
                   0x0008be                  _ldexpf
                   0x000902                  _logf
-                  0x000d3c                  _main
+                  0x000dc4                  _main
                   0x000448                  _powf
                   0x000a4e                  _strlen
 
@@ -423,34 +426,34 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x204d
+.debug_info       0x000000       0x20d2
  *(.debug_info)
  .debug_info      0x000000        0x552 build/default/production/ChangeClk.o
  .debug_info      0x000552        0xe78 build/default/production/UART2.o
  .debug_info      0x0013ca        0x150 build/default/production/main.o
- .debug_info      0x00151a        0xb33 build/default/production/ADC.o
+ .debug_info      0x00151a        0xbb8 build/default/production/ADC.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x36d
+.debug_abbrev     0x000000        0x388
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x123 build/default/production/ChangeClk.o
  .debug_abbrev    0x000123        0x114 build/default/production/UART2.o
  .debug_abbrev    0x000237         0x34 build/default/production/main.o
- .debug_abbrev    0x00026b        0x102 build/default/production/ADC.o
+ .debug_abbrev    0x00026b        0x11d build/default/production/ADC.o
 
-.debug_line       0x000000        0x3f9
+.debug_line       0x000000        0x40a
  *(.debug_line)
  .debug_line      0x000000        0x11b build/default/production/ChangeClk.o
  .debug_line      0x00011b        0x183 build/default/production/UART2.o
  .debug_line      0x00029e         0x37 build/default/production/main.o
- .debug_line      0x0002d5        0x124 build/default/production/ADC.o
+ .debug_line      0x0002d5        0x135 build/default/production/ADC.o
 
-.debug_frame      0x000000        0x1aa
+.debug_frame      0x000000        0x1c4
  *(.debug_frame)
  .debug_frame     0x000000         0x2e build/default/production/ChangeClk.o
  .debug_frame     0x00002e         0xec build/default/production/UART2.o
  .debug_frame     0x00011a         0x2e build/default/production/main.o
- .debug_frame     0x000148         0x62 build/default/production/ADC.o
+ .debug_frame     0x000148         0x7c build/default/production/ADC.o
 
 .debug_str        0x000000         0xbd
  *(.debug_str)
@@ -465,7 +468,7 @@ __FDS
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x109
+                  0x000000        0x116
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1d build/default/production/ChangeClk.o
@@ -474,7 +477,7 @@ __FDS
  .debug_pubnames
                   0x0000b5         0x1b build/default/production/main.o
  .debug_pubnames
-                  0x0000d0         0x39 build/default/production/ADC.o
+                  0x0000d0         0x46 build/default/production/ADC.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -899,7 +902,7 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000060        0x2b7
+                  0x000060        0x2c3
  .debug_pubtypes
                   0x000060         0x7a build/default/production/ChangeClk.o
  .debug_pubtypes
@@ -907,76 +910,77 @@ LOAD data_init
  .debug_pubtypes
                   0x0001f9         0x12 build/default/production/main.o
  .debug_pubtypes
-                  0x00020b        0x10c build/default/production/ADC.o
+                  0x00020b        0x118 build/default/production/ADC.o
 
 __c30_signature
-                  0x000317         0xb4
+                  0x000323         0xb4
  __c30_signature
-                  0x000317          0x6 build/default/production/ChangeClk.o
+                  0x000323          0x6 build/default/production/ChangeClk.o
  __c30_signature
-                  0x00031d          0x6 build/default/production/UART2.o
+                  0x000329          0x6 build/default/production/UART2.o
  __c30_signature
-                  0x000323          0x6 build/default/production/main.o
+                  0x00032f          0x6 build/default/production/main.o
  __c30_signature
-                  0x000329          0x6 build/default/production/ADC.o
+                  0x000335          0x6 build/default/production/ADC.o
  __c30_signature
-                  0x00032f          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x00033b          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x000335          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000341          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x00033b          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                  0x000347          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(divsf3.eo)
  __c30_signature
-                  0x000341          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x00034d          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
  __c30_signature
-                  0x000347          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                  0x000353          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
  __c30_signature
-                  0x00034d          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000359          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
  __c30_signature
-                  0x000353          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x00035f          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fpack.eo)
  __c30_signature
-                  0x000359          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x000365          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(funpack.eo)
  __c30_signature
-                  0x00035f          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x00036b          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(funpack2.eo)
  __c30_signature
-                  0x000365          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000371          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(futil.eo)
  __c30_signature
-                  0x00036b          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(powf.eo)
+                  0x000377          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(powf.eo)
  __c30_signature
-                  0x000371          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(_frexpf.eo)
+                  0x00037d          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(_frexpf.eo)
  __c30_signature
-                  0x000377          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+                  0x000383          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(addsf3.eo)
  __c30_signature
-                  0x00037d          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(errno.eo)
+                  0x000389          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(errno.eo)
  __c30_signature
-                  0x000383          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(expf.eo)
+                  0x00038f          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(expf.eo)
  __c30_signature
-                  0x000389          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fchop.eo)
+                  0x000395          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fchop.eo)
  __c30_signature
-                  0x00038f          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+                  0x00039b          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(feqltle.eo)
  __c30_signature
-                  0x000395          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                  0x0003a1          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fgtge.eo)
  __c30_signature
-                  0x00039b          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fixsfsi.eo)
+                  0x0003a7          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fixsfsi.eo)
  __c30_signature
-                  0x0003a1          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
+                  0x0003ad          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
  __c30_signature
-                  0x0003a7          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x0003b3          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
  __c30_signature
-                  0x0003ad          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(ldexpf.eo)
+                  0x0003b9          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(ldexpf.eo)
  __c30_signature
-                  0x0003b3          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(logf.eo)
+                  0x0003bf          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(logf.eo)
  __c30_signature
-                  0x0003b9          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x0003c5          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
  __c30_signature
-                  0x0003bf          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x0003cb          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fcompare.eo)
  __c30_signature
-                  0x0003c5          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a(strlen.XX_eo)
+                  0x0003d1          0x6 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a(strlen.XX_eo)
 
-.nbss               0x0800          0x4
- .nbss              0x0800          0x2 build/default/production/UART2.o
-                    0x0800                  _clkval
- .nbss              0x0802          0x2 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(errno.eo)
-                    0x0802                  _errno
+.nbss               0x0800         0x1c
+ .nbss              0x0800         0x18 build/default/production/ADC.o
+ .nbss              0x0818          0x2 build/default/production/UART2.o
+                    0x0818                  _clkval
+ .nbss              0x081a          0x2 d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(errno.eo)
+                    0x081a                  _errno
 
 .ivt._U2RXInterrupt
                   0x000050          0x2
@@ -994,7 +998,7 @@ __c30_signature
 .const              0x8a5a          0x2 load address 0x000a5a  
  .const             0x8a5a          0x2 build/default/production/ADC.o
 
-.text             0x000a5c        0x2ee
+.text             0x000a5c        0x354
  .text            0x000a5c        0x1ee build/default/production/UART2.o
                   0x000a5c                  _InitUART2
                   0x000ac4                  _XmitUART2
@@ -1002,14 +1006,17 @@ __c30_signature
                   0x000b5a                  _Disp2Hex32
                   0x000bc8                  _Disp2Dec
                   0x000c28                  _Disp2String
- .text            0x000c4a         0x7e build/default/production/ADC.o
+ .text            0x000c4a         0xf2 build/default/production/ADC.o
                   0x000c4a                  _ADCinit
                   0x000c96                  _do_ADC
                   0x000cb8                  _ADC_Display
- .text            0x000cc8         0x74 build/default/production/ChangeClk.o
-                  0x000cc8                  _NewClk
- .text            0x000d3c          0xe build/default/production/main.o
-                  0x000d3c                  _main
+                  0x000cce                  _barGraph
+ .text            0x000d3c         0x74 build/default/production/ChangeClk.o
+                  0x000d3c                  _NewClk
 
-.dinit            0x000d4a          0xe
- .dinit           0x000d4a          0xe data_init
+.dinit            0x000db0         0x14
+ .dinit           0x000db0         0x14 data_init
+
+.text             0x000dc4          0xe
+ .text            0x000dc4          0xe build/default/production/main.o
+                  0x000dc4                  _main

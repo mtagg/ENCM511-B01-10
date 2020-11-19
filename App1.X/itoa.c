@@ -10,7 +10,6 @@
          n--;                    // do-while loop to make sure that 0s arent forgotten
          str[n] = (NUMBER % 10);               // ie: if number is 32, the char before null will be 2  
          NUMBER /= 10;                         // ie: get rid of the least significant digit and restart
-         Disp2String("HELLO");
      }                           // stop when the char array is finished
        
      return str;                             //returns a char array in correct order   
