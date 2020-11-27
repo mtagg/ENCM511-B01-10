@@ -1,8 +1,6 @@
 #include "ADC.h"
 
 void ADCinit(void){
-// Initialize CN interupt for AN5
-    //CNEN2bits.CN29IE = 1;               //enable CN interrupts for CN29 - RA3/pin8/AN5
     
 // configure ADC settings in AD1CON1 register
     AD1CON1bits.FORM = 0b00;          //set FORM bits to integer mode    
@@ -26,12 +24,11 @@ void ADCinit(void){
     AD1CHSbits.CH0NA = 0;           //channel 0 negative input is VR- for MUX A
     AD1CHSbits.CH0SA = 0b0101;      //channel 0 positive input is AN5 for MUX A  
     AD1PCFGbits.PCFG5 = 0;          //sets AN5 pin to sample pin voltage in analog mode
-    AD1CSSLbits.CSSL5 = 0;          //omit AN5 pin from digital input scan
-    
-    
+    AD1CSSLbits.CSSL5 = 0;          //omit AN5 pin from digital input scan    
 }
+
 uint16_t do_ADC(void){    
-    AD1CON1bits.ADON = 1;         //ADC module on
+    AD1CON1bits.ADON = 1;             //ADC module on
     uint16_t ADCvalue;                //holds converted digital output
     AD1CON2bits.BUFM = 0;             //buffer configured to 16-words
     AD1CON1bits.ASAM = 0;             //sampling will start when SAMP set  

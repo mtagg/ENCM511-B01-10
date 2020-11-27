@@ -26,7 +26,7 @@
 void main(void) {
      
     // Change Clock
-     NewClk(500); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
+    NewClk(500); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
     
     ADCinit();
     while(1)
