@@ -21,7 +21,7 @@
 
 //Preprocessor directives - Configuration bits for MCU start up
 #pragma config FCKSM = CSECMD // Clock switching is enabled, clock monitor disabled
-
+#pragma config OSCIOFNC = ON  // CLKO output disabled on pin 8, use as IO.
 
 // MACROS for Idle, Sleep modes
 #define Nop() {__asm__ volatile ("nop");}
