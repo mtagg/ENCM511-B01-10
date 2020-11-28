@@ -8,6 +8,7 @@ extern "C" {
     
 #include <xc.h>
 #include "UART2.h"
+#include "ChangeClk.h"
     
     void ADCinit(void);
     uint16_t do_ADC(void);

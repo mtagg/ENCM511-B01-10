@@ -17,6 +17,8 @@
 // User header files
 #include "IOs.h"
 #include "ChangeClk.h"
+#include "debouncer.h"
+#include "ADC.h"
 
 
 //Preprocessor directives - Configuration bits for MCU start up
@@ -30,18 +32,25 @@
 #define Idle() {__asm__ volatile ("pwrsav #1");}    //Idle() - put MCU in idle mode - only CPU off
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
 
+extern unsigned int STATE;
+
+
 //MAIN
 void main(void) {
-     
+ 
     // Change Clock
      NewClk(32); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
+     STATE = 3;  // state 3 > PB3 pressed, Idle mode
      
-   // Initialize IOs for low-power wake-up
-    AD1PCFG = 0xFFFF; // Turn all analog pins as digital
-    
+     //Initialize Registers:
+     IOinit();
+     ADCinit(); 
+     T2Init();  //debounce init
+     
     while(1)
     {
-        		//Your code here
+        NewClk(32);
+        Idle();
     }
     
     

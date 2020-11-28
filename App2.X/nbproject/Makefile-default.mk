@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ADC.c ChangeClk.c UART2.c main.c random.c
+SOURCEFILES_QUOTED_IF_SPACED=ADC.c ChangeClk.c UART2.c main.c debouncer.c IOs.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC.o ${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/main.o ${OBJECTDIR}/random.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/ChangeClk.o.d ${OBJECTDIR}/UART2.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/random.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADC.o ${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/main.o ${OBJECTDIR}/debouncer.o ${OBJECTDIR}/IOs.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/ChangeClk.o.d ${OBJECTDIR}/UART2.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/debouncer.o.d ${OBJECTDIR}/IOs.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ADC.o ${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/main.o ${OBJECTDIR}/random.o
+OBJECTFILES=${OBJECTDIR}/ADC.o ${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/main.o ${OBJECTDIR}/debouncer.o ${OBJECTDIR}/IOs.o
 
 # Source Files
-SOURCEFILES=ADC.c ChangeClk.c UART2.c main.c random.c
+SOURCEFILES=ADC.c ChangeClk.c UART2.c main.c debouncer.c IOs.c
 
 
 
@@ -123,12 +123,19 @@ ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/random.o: random.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/debouncer.o: debouncer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/random.o.d 
-	@${RM} ${OBJECTDIR}/random.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  random.c  -o ${OBJECTDIR}/random.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/random.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
-	@${FIXDEPS} "${OBJECTDIR}/random.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/debouncer.o.d 
+	@${RM} ${OBJECTDIR}/debouncer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  debouncer.c  -o ${OBJECTDIR}/debouncer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/debouncer.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/debouncer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/IOs.o: IOs.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/IOs.o.d 
+	@${RM} ${OBJECTDIR}/IOs.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  IOs.c  -o ${OBJECTDIR}/IOs.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/IOs.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/IOs.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 else
 ${OBJECTDIR}/ADC.o: ADC.c  nbproject/Makefile-${CND_CONF}.mk
@@ -159,12 +166,19 @@ ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/random.o: random.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/debouncer.o: debouncer.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/random.o.d 
-	@${RM} ${OBJECTDIR}/random.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  random.c  -o ${OBJECTDIR}/random.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/random.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
-	@${FIXDEPS} "${OBJECTDIR}/random.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/debouncer.o.d 
+	@${RM} ${OBJECTDIR}/debouncer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  debouncer.c  -o ${OBJECTDIR}/debouncer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/debouncer.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/debouncer.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/IOs.o: IOs.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/IOs.o.d 
+	@${RM} ${OBJECTDIR}/IOs.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  IOs.c  -o ${OBJECTDIR}/IOs.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/IOs.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/IOs.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 
