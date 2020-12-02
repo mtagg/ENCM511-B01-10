@@ -1,5 +1,5 @@
 #include "ADC.h"
-#include "ChangeClk.h"
+
 
 extern unsigned int STATE;
 void ADCinit(void){
@@ -49,67 +49,79 @@ unsigned int do_ADC(void){
 }
 
 
-void ADC_Display(unsigned int V){
+void ADC_Display(void){
+    //UART display function for ADC voltage
     NewClk(500);
     char* prefix;
     char* suffix;
     if      (STATE == 1){ 
         prefix = "VOLTMETER Voltage   = ";
-        suffix = "V  ";    
+        suffix = "V             "; 
+            while (STATE == 1){
+                Disp2String("\r");          //return carriage
+                Disp2String(prefix);        //ohms or volts
+                ADC2mV(do_ADC());         //find current value    
+                Disp2String(suffix);
+            }
+
     }
     else if (STATE == 2){ 
         prefix = "OHMMETER Resistance = ";
-        suffix = "Ohms";        
+        suffix = " Ohms";  
+            while (STATE == 2 ){
+                Disp2String("\r");          //return carriage
+                Disp2String(prefix);        //ohms or volts
+                ADC2ohm(do_ADC());         //find current value    
+                Disp2String(suffix);
+            }
     }
-    //UART display function for ADC voltage
-    while (STATE != 3){
-    Disp2String("\r");          //return carriage
-    Disp2String(prefix);        //ohms or volts
-    Disp2Dec(do_ADC());         //find current value    
-    Disp2String(suffix);
+}
+
+void ADC2mV(unsigned int V){
+    // converting 10bit ADC bits into mV units
+    unsigned int mv = 0;
+    while (V > 24){
+        mv += 2;
+        V -= 2;
+    } mv *= 3.25;
+
+    //setting up/ executing UART display code
+    static char buff[5];
+    buff[4] = '\0';
+    int i = 3;   
+    while (i >= 0){
+        buff[i--] = mv%10;
+        mv  /= 10;
+    }
+    while(i < 4){
+        if (i == 1) XmitUART2('.',1);
+        XmitUART2(buff[i++] + 0x30 ,1);
+    }
+}
+void ADC2ohm(unsigned int V){
+    // converting 10bit ADC bits into mV units
+    unsigned int R = 0;
+    unsigned int mv = 0;
+    while (V > 24){
+        mv += 2;
+        V -= 2;
+    }
+    mv *= 3;
+    int temp = 3000 - mv;
+    R = 1000 * mv/temp;
+    
+    //setting up/ executing UART display code
+    static char buff[7];
+    buff[6] = '\0';
+    int i = 5;   
+    while (i >= 0){
+        buff[i--] = R%10;
+        R  /= 10;
+    }
+    while(i < 6){
+        XmitUART2(buff[i++] + 0x30 ,1);
     }
 }
 
 
-unsigned int ADC2mV(unsigned int V){
-    return V*3250/1023; //returns the mV value based on 3.25V Vref and 1023 maximum possible V value
-}
 
-
-//********************************************************************************************
-//                      THIS STUFF IS ALL SCREWED K
-//********************************************************************************************
-//unsigned int ADC2ohm(unsigned int V){
-//    //3.25 Vref
-//    // if V = 1023/2 then R must be 1k ohm 
-//    //1023 is maximum possible V value
-//    
-////    R = ((1000*3.25)/(V*3.25)/1023) - 1000
-//
-//            R = (Rref*    (Vin/Vref)    - Rref
-//            R = Rref*(1023)/adc - Rref
-//                    
-//            (adc/1023) 
-//            // 1000 is the maximum Vin we can read which would mean R is huge
-//            // 0 is the minimum, which means R would be tiny0
-//                    
-//            3.25V = amps(1000 + R) 
-//            amps = (3.25(adc/1023)) / (R))
-//                    
-//                    1 = (adc/1023(R)) * (1000+R)
-//                   1/adc = (1000+R)/(1023(R))
-//                    (1023)R/adc = 1000R + R^2
-//                       0 = R^2 + 1000R - (1023R/adc)
-//                    3.25*V/1023
-//                    2R =  sqrt(1mill + (4)(1023^2)/(3250*V)) -1000
-//}
-
-
-
-
-
-
-
-
-
-void __attribute__((interrupt,no_auto_psv)) _ADC1Interrupt(void){ if (IFS0bits.AD1IF == 1)IFS0bits.AD1IF = 0; }

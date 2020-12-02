@@ -19,6 +19,7 @@
 #include "ChangeClk.h"
 #include "debouncer.h"
 #include "ADC.h"
+#include "UART2.h"
 
 
 //Preprocessor directives - Configuration bits for MCU start up
@@ -39,9 +40,9 @@ extern unsigned int STATE;
 void main(void) {
  
     // Change Clock
-     NewClk(32); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
+      // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
      STATE = 3;  // state 3 > PB3 pressed, Idle mode
-     
+     NewClk(500);
      //Initialize Registers:
      IOinit();
      ADCinit(); 
@@ -49,8 +50,8 @@ void main(void) {
      
     while(1)
     {
-        NewClk(32);
-        Idle();
+       NewClk(32);
+       Idle();
     }
     
     

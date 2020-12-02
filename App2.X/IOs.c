@@ -29,7 +29,6 @@ return;
 
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
     
-    
     if (IFS1bits.CNIF == 1){ 
         TMR2 = 0;                // reset debounce counter   
         T2CONbits.TON = 1;       // Start debounce timer
@@ -42,16 +41,16 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
         //PB1 pressed
         if (PB1 == 0 && PB2 == 1 && PB3 == 1){
             STATE = 1;
-            ADC_Display(do_ADC());
+            ADC_Display();
         }       
         //PB2 pressed
         else if (PB1 == 1 && PB2 == 0 && PB3 == 1){
             STATE = 2;   
-            ADC_Display(do_ADC());
+            ADC_Display();
         }     
         //PB3 pressed
         else if (PB1 == 1 && PB2 == 1 && PB3 == 0){
             STATE = 3;  
-        }  
+        }     
     }
 }
