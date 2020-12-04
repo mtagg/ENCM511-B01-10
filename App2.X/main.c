@@ -37,12 +37,11 @@ extern unsigned int STATE;
 
 
 //MAIN
-void main(void) {
+int main(void) {
  
     // Change Clock
       // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
      STATE = 3;  // state 3 > PB3 pressed, Idle mode
-     NewClk(500);
      //Initialize Registers:
      IOinit();
      ADCinit(); 
@@ -55,5 +54,5 @@ void main(void) {
     }
     
     
-    return;
+    return 1;
 }

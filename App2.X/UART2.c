@@ -9,7 +9,6 @@
 #include "xc.h"
 #include "math.h"
 #include "string.h"
-
 #include "UART2.h"
 
 
@@ -193,7 +192,7 @@ void Disp2Dec(uint16_t Dec_num)
     uint16_t quot; 
     uint8_t ctr = 0;  //counter
     XmitUART2(' ',1);  // Disp Gap
-    while(ctr<3)
+    while(ctr<5)
     {
         quot = Dec_num/(pow(10,(4-ctr)));
         rem = quot%10;

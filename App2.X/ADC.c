@@ -51,7 +51,7 @@ unsigned int do_ADC(void){
 
 void ADC_Display(void){
     //UART display function for ADC voltage
-    NewClk(500);
+    NewClk(8);
     char* prefix;
     char* suffix;
     if      (STATE == 1){ 
@@ -75,16 +75,16 @@ void ADC_Display(void){
                 Disp2String(suffix);
             }
     }
+    Disp2String("\r                                                                              \r");
 }
 
 void ADC2mV(unsigned int V){
     // converting 10bit ADC bits into mV units
     unsigned int mv = 0;
-    while (V > 24){
+    while (V > 24){ //division through subtraction to avoid decimals in 16-bit C
         mv += 2;
         V -= 2;
-    } mv *= 3.25;
-
+    } mv*=3;        //Vref = 3V
     //setting up/ executing UART display code
     static char buff[5];
     buff[4] = '\0';
@@ -99,28 +99,23 @@ void ADC2mV(unsigned int V){
     }
 }
 void ADC2ohm(unsigned int V){
-    // converting 10bit ADC bits into mV units
-    unsigned int R = 0;
-    unsigned int mv = 0;
-    while (V > 24){
-        mv += 2;
-        V -= 2;
-    }
-    mv *= 3;
-    int temp = 3000 - mv;
-    R = 1000 * mv/temp;
     
-    //setting up/ executing UART display code
-    static char buff[7];
-    buff[6] = '\0';
-    int i = 5;   
-    while (i >= 0){
-        buff[i--] = R%10;
-        R  /= 10;
+    // converting 10bit ADC bits into mV units
+    unsigned long int R;
+    unsigned int mv = 0;
+    while (V >= 2){            //converts 10bit into Voltage based on Vref
+        mv +=6;             
+        V-=2;
     }
-    while(i < 6){
-        XmitUART2(buff[i++] + 0x30 ,1);
-    }
+    unsigned int i = 0;
+    R = 0;
+    while (i < 1000){
+        R+=mv;
+        i+=1;
+    }R/=(3067-mv);
+    Disp2Dec(R);  
+    //measurable range: 0 ohm -> 51344 Ohm (@ open circuit)
+    
 }
 
 
