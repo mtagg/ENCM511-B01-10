@@ -38,9 +38,7 @@ extern unsigned int STATE;
 
 //MAIN
 int main(void) {
- 
-    // Change Clock
-      // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
+
      STATE = 3;  // state 3 > PB3 pressed, Idle mode
      //Initialize Registers:
      IOinit();
@@ -49,7 +47,7 @@ int main(void) {
      
     while(1)
     {
-       NewClk(32);
+       NewClk(32); // go back to 32khz whenever out of multimeter modes
        Idle();
     }
     

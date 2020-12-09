@@ -14,7 +14,6 @@ void T2Init(void){
         IFS0bits.T2IF = 0;       // Timer2 Interrupt Flag clear
         IPC1 = 0xE000;           // T2 interrupt priority set to level 6
         PR2 = 150;               // 10ms Debounce timer
-        return;
 }
 void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void){
     if (IFS0bits.T2IF == 1){

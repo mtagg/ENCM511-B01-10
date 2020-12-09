@@ -34,7 +34,7 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
         T2CONbits.TON = 1;       // Start debounce timer
         IFS0bits.T2IF = 0;       // Timer2 Interrupt Flag clear
         IEC0bits.T2IE = 1;       // enable T2 debounce interrupts
-        while (IFS0bits.T2IF == 0){}
+        while (IFS0bits.T2IF == 0){} //wait for debounce delay
                
         IFS1bits.CNIF = 0;      //clear CN interrupt flag bit
 

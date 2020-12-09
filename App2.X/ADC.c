@@ -89,12 +89,12 @@ void ADC2mV(unsigned int V){
     static char buff[5];
     buff[4] = '\0';
     int i = 3;   
-    while (i >= 0){
+    while (i >= 0){                     //populate a string buffer with mV value
         buff[i--] = mv%10;
         mv  /= 10;
     }
-    while(i < 4){
-        if (i == 1) XmitUART2('.',1);
+    while(i < 4){                       //start displaying mV value
+        if (i == 1) XmitUART2('.',1); // place the decimal to show units in Volts
         XmitUART2(buff[i++] + 0x30 ,1);
     }
 }
@@ -109,10 +109,10 @@ void ADC2ohm(unsigned int V){
     }
     unsigned int i = 0;
     R = 0;
-    while (i < 1000){
+    while (i < 1000){           // multiplication through successive addition
         R+=mv;
         i+=1;
-    }R/=(3067-mv);
+    }R/=(3067-mv);              // R = (Ro * Vin)/(Vref-Vin)
     Disp2Dec(R);  
     //measurable range: 0 ohm -> 51344 Ohm (@ open circuit)
     

@@ -6,14 +6,15 @@
 #include "UART2.h"
 #include "ChangeClk.h"
 #include "pulse.h"
+#include <stdio.h>
+#include <math.h>
     
     void ADCinit(void);
     unsigned int do_ADC(void);
     void ADC_Display(void);
-    void ADC2mV(unsigned int V);
+    char* ADC2mV(unsigned int V);
     void ADC2ohm(unsigned int V);
-    //void __attribute__((interrupt,no_auto_psv)) _ADC1Interrupt(void);
-
+    void clear(void);
 
 #endif	/* ADC_H */
 

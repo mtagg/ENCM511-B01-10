@@ -1,7 +1,7 @@
 #include "ADC.h"
 
 
-extern unsigned int STATE;
+unsigned int STATE;
 void ADCinit(void){
     
 // configure ADC settings in AD1CON1 register
@@ -11,7 +11,7 @@ void ADCinit(void){
 // configure ADC settings in AD1CON2
     AD1CON2bits.VCFG = 0b000;       //selects Vref to be from PIC VDD VSS
     AD1CON2bits.CSCNA = 0;          //do not scan inputs
-    IFS0bits.AD1IF = 0;             //reset interrupt flag just in case  
+    //IFS0bits.AD1IF = 0;             //reset interrupt flag just in case  
       
 //configure ADC sampling
     AD1CON3bits.ADRC = 0;           //using system clock
@@ -50,66 +50,37 @@ unsigned int do_ADC(void){
 
 
 void ADC_Display(void){
-    //UART display function for ADC voltage
-    char* prefix;
-    char* suffix;
-    if      (STATE == 1){ 
-        prefix = "VOLTMETER Voltage   = ";
-        suffix = "V             "; 
-            while (STATE == 1){
-                Disp2String("\r");          //return carriage
-                Disp2String(prefix);        //ohms or volts
-                ADC2mV(do_ADC());         //find current value    
-                Disp2String(suffix);
-            }
-
+         
+     if (STATE == 1){
+        Disp2String("\rVOLTMETER Voltage   = ");        //ohms or volts
+        //while (STATE == 1){
+            Disp2String(ADC2mV(do_ADC()));         //find current value    
+            Disp2String("V   ");
+            XmitUART2(8,9);
+        //}
     }
     else if (STATE == 2){ 
-        prefix = "OHMMETER Resistance = ";
-        suffix = " Ohms";  
-            while (STATE == 2 ){
-                Disp2String("\r");          //return carriage
-                Disp2String(prefix);        //ohms or volts
-                ADC2ohm(do_ADC());         //find current value    
-                Disp2String(suffix);
-            }
-    }else if (STATE ==3){
-        prefix = "PULSEMETER Freq = ";
-        char* midfix = " kHz, Amplitude = ";
-        suffix = " V";
-
-                Disp2String("r");
-                Disp2String(prefix);
-                Disp2String(frequency());
-                Disp2String(midfix);
-                ADC2mV(amplitude());         //find current value
-                Disp2String(suffix);           
+        Disp2String("\rOHMMETER Resistance = ");        //ohms or volts  
+        //while (STATE == 2){
+            ADC2ohm(do_ADC());         //find current value    
+            Disp2String(" Ohms");
+            XmitUART2(8,12);
+       // } 
     }
-
-
-
-    Disp2String("\r                                                                              \r");
+    else if (STATE ==3){
+        Disp2String("\rPULSEMETER Freq = ");
+        Disp2String(frequency());
+        Disp2String(" kHz, Amplitude = ");
+        ADC2mV(amplitude());         //find current value
+        Disp2String(" V");           
+    }  
 }
 
-void ADC2mV(unsigned int V){
-    // converting 10bit ADC bits into mV units
-    unsigned int mv = 0;
-    while (V > 24){ //division through subtraction to avoid decimals in 16-bit C
-        mv += 2;
-        V -= 2;
-    } mv*=3;        //Vref = 3V
-    //setting up/ executing UART display code
+char* ADC2mV(unsigned int V){
     static char buff[5];
-    buff[4] = '\0';
-    int i = 3;   
-    while (i >= 0){                     //populate a string buffer with mV value
-        buff[i--] = mv%10;
-        mv  /= 10;
-    }
-    while(i < 4){                       //start displaying mV value
-        if (i == 1) XmitUART2('.',1); // place the decimal to show units in Volts
-        XmitUART2(buff[i++] + 0x30 ,1);
-    }
+    sprintf(buff, "%1.3f", (V*3.25/1023));
+    return buff;
+    
 }
 void ADC2ohm(unsigned int V){
     
@@ -130,6 +101,10 @@ void ADC2ohm(unsigned int V){
     //measurable range: 0 ohm -> 51344 Ohm (@ open circuit)
     
 }
-
+void clear(void){
+    Disp2String("\r");
+    XmitUART2(32,50);
+    Disp2String("\r");
+}
 
 
