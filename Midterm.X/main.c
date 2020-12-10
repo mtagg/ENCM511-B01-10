@@ -1,10 +1,3 @@
-/*
- * File:   main.c
- * Author: Rushi V
- *
- * Created on September 26, 2020, 9:17 PM
- */
-
 // MPLAB header libraries
 #include <xc.h>
 #include <p24fxxxx.h>
@@ -35,18 +28,57 @@
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
 
 extern unsigned int STATE;
+extern unsigned int freq;
+extern unsigned int amp;
+
 
 //MAIN
 int main(void) {
-   //STATE = 1;     //voltmeter mode
-   IOinit();  
-   ADCinit();     //driver 5 init
-   T1init();      //debounce timer
-   pulseInit();   //driver 6 init
 
-   while(1){
-      clear();
-      Idle();
-   }
-   return 1;
+     STATE = 1;  //start in mode 1: voltmeter
+     IOinit();    //initialize digital IO
+     //TimerInit(); //initialize timers for frequency counting
+     DBinit();    //debounce init
+     ADCinit();   //initialize analog IO
+     //frequency();
+
+//PULSE GENERATION SETTINGS ON REFO/RB15/PIN18 
+
+//  // Setting #1:
+    //  NewClk(8);
+    //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
+    //  REFOCONbits.ROSSLP = 0; // Ref oscillator is disabled in sleep 
+    //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
+    //  REFOCONbits.RODIV = 0b0011;  //changes frequency of pulse gen 
+    //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
+//  // Setting #2:
+    //  NewClk(8);
+    //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
+    //  REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep 
+    //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
+    //  REFOCONbits.RODIV = 0b1111;  //changes frequency of pulse gen 
+    //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
+//  // Setting #3:
+    //  NewClk(500);
+    //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
+    //  REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep 
+    //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
+    //  REFOCONbits.RODIV = 0b1001;  //changes frequency of pulse gen 
+    //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
+//  // Setting #4:
+     NewClk(500);
+     TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
+     REFOCONbits.ROSSLP = 1; // Ref oscillator runs while in sleep
+     REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
+     REFOCONbits.RODIV = 0b0000;  //changes frequency of pulse gen 
+     REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
+
+
+    while(1)
+    {
+      ADC_Display();
+    }
+    
+    
+    return 1;
 }
