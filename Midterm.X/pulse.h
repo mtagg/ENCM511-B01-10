@@ -3,15 +3,16 @@
 
 #include "xc.h"
 #include "ADC.h"
-// #include "IOs.h"
-// #include <stdio.h>
-// #include <math.h>
+#include "IOs.h"
+#include <stdio.h>
+#include <math.h>
 
 
 void TimerInit(void);
-void frequency(void);
-void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void);
-
+char* frequency(void);
+char* amplitude(void);
+// void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void);
+// void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void);
 
 
 #endif

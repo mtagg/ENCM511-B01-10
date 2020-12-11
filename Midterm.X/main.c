@@ -28,21 +28,19 @@
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
 
 extern unsigned int STATE;
+extern unsigned int count;
 extern unsigned int freq;
-extern unsigned int amp;
+
 
 
 //MAIN
 int main(void) {
 
-     STATE = 1;  //start in mode 1: voltmeter
-     IOinit();    //initialize digital IO
-     //TimerInit(); //initialize timers for frequency counting
-     DBinit();    //debounce init
-     ADCinit();   //initialize analog IO
-     //frequency();
+    STATE = 1;  //start in mode 1: voltmeter 
+    IOinit();    //initialize digital IO
+    DBinit();    //debounce init
 
-//PULSE GENERATION SETTINGS ON REFO/RB15/PIN18 
+//PULSE GENERATION SETTINGS FOR DEMO VIDEO:
 
 //  // Setting #1:
     //  NewClk(8);
@@ -70,15 +68,19 @@ int main(void) {
      TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
      REFOCONbits.ROSSLP = 1; // Ref oscillator runs while in sleep
      REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
-     REFOCONbits.RODIV = 0b0000;  //changes frequency of pulse gen 
+     REFOCONbits.RODIV = 0b0111; //0b0111; //for demo setting 4
      REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
+    
+    TimerInit(); //initialize timers for frequency counting
+    //ADCinit();  //initialize all analog/ADC bits
 
+    while(1){
+    //   ADC_Display();
 
-    while(1)
-    {
-      ADC_Display();
+    //these are in main for debugging purposes, feel free to remove
+      Disp2String("\rTMR2, COUNT: ");
+      Disp2Dec(TMR2);
+      Disp2Dec(count);
     }
-    
-    
     return 1;
 }

@@ -5,11 +5,11 @@ Tool Name:
 
 Command:
   -p24F16KA101 \
-  --mdfp=D:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16 \
+  --mdfp=D:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16 \
   -o \
   dist/default/production/App2.X.production.elf \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/.. \
-  -LD:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16/bin/../support/PIC24F/gld \
+  -LD:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16/bin/../support/PIC24F/gld \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../lib \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../support/PIC24E/gld \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../support/PIC24F/gld \

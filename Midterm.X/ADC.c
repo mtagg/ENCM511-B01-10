@@ -1,9 +1,7 @@
 #include "ADC.h"
 extern unsigned int STATE;
 extern unsigned int freq;
-extern unsigned int amp;
 
-extern unsigned int STATE;
 void ADCinit(void){
     
 // configure ADC settings in AD1CON1 register
@@ -31,14 +29,14 @@ void ADCinit(void){
     AD1PCFGbits.PCFG11 = 0;          //sets AN11 pin to sample pin voltage in analog mode
     AD1CSSLbits.CSSL11 = 0;          //omit AN11 pin from digital input scan 
 //setup pin15 for analog in
-   // AD1PCFGbits.PCFG12 = 1;          //sets AN12 pin to sample pin voltage in digi mode
-    //AD1CSSLbits.CSSL12 = 1;          //AN12 ommitted from input scan
+    AD1PCFGbits.PCFG12 = 1;          //sets AN12 pin to sample pin voltage in digi mode
+    AD1CSSLbits.CSSL12 = 1;          //AN12 ommitted from input scan
 }
 
 unsigned int do_ADC(void){    
     if      (STATE == 1)    AD1CHSbits.CH0SA = 0b0101;       //channel 0 positive input is AN5  (pin 8) for MUX A
     else if (STATE == 2)    AD1CHSbits.CH0SA = 0b1011;       //channel 0 positive input is AN11 (pin 16) for MUX A
-    //else if (STATE == 3)    AD1CHSbits.CH0SA = 0b1100;      //channel 0 + input is AN12 (pin 15 from pulse osc)
+    else if (STATE == 3)    AD1CHSbits.CH0SA = 0b1100;      //channel 0 + input is AN12 (pin 15 from pulse osc)
 
     AD1CON1bits.ADON = 1;             //ADC module on
     unsigned int ADCvalue;            //holds converted digital output
@@ -57,37 +55,37 @@ unsigned int do_ADC(void){
 
 void ADC_Display(void){
     //UART display function for ADC voltage
-
     if      (STATE == 1){ 
         Disp2String("\rVOLTMETER Voltage   = ");     
-            while (STATE == 1){
-                ADC2mV(do_ADC());         //find current value    
-                XmitUART2(8,7);
-            }
-
+        while (STATE == 1){
+            ADC2mV(do_ADC());         //find current value    
+            XmitUART2(8,7);
+        }
     }
     else if (STATE == 2){ 
         Disp2String("\rOHMMETER Resistance = ");
-            while (STATE == 2){
-                ADC2ohm(do_ADC());         //find current value    
-                XmitUART2(8,10);
-            }
+        while (STATE == 2){
+            ADC2ohm(do_ADC());         //find current value    
+            XmitUART2(8,10);
+        }
     }
     else if (STATE == 3){ 
-        Disp2String("\rPULSEMETER Freq = ");
-        //Disp2String(frequency());
-        Disp2String(" kHz, Amplitude = ");
-        //Disp2String(amplitude());        
-        Disp2String(" V"); 
-        while(STATE == 3){}          
+            while(STATE == 3){
+            Disp2String("\rPULSEMETER Freq = ");
+            Disp2String(frequency());
+            Disp2String(" kHz, Amplitude = ");
+            Disp2String(amplitude()); 
+            //XmitUART2(8,30);     
+        }  
     }
-    clearLine();    
+    clearLine(); 
+    return; 
 }
 
 void ADC2mV(unsigned int V){
     // converting 10bit ADC bits into V units
     double v = (3.25*V)/1024;
-    char buff[10];
+    char buff[5];
     sprintf(buff, "%1.3f V", v);
     Disp2String(buff);
 }

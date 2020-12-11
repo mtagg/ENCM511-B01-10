@@ -3,6 +3,6 @@ main.c  \
 IOs.h  \
 ADC.h  \
 UART2.h  \
-ChangeClk.h  \
- debouncer.h  \
-pulse.h 
+pulse.h  \
+ ChangeClk.h  \
+debouncer.h 

@@ -5,8 +5,8 @@
         <group>
             <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/App2.X/main.c</file>
             <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/App2.X/IOs.c</file>
-            <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/App2.X/ADC.c</file>
             <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/App2.X/debouncer.c</file>
+            <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/App2.X/ADC.c</file>
         </group>
     </open-files>
 </project-private>

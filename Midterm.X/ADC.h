@@ -4,6 +4,7 @@
 
 #include <xc.h>
 #include "UART2.h"
+#include "pulse.h"
 #include <stdio.h>
 #include <math.h>
     
