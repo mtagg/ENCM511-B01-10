@@ -28,15 +28,10 @@
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
 
 extern unsigned int STATE;
-extern unsigned int count;
-extern unsigned int freq;
 
-
-
-//MAIN
 int main(void) {
 
-    STATE = 1;  //start in mode 1: voltmeter 
+    STATE = 1;   //start in mode 1: voltmeter 
     IOinit();    //initialize digital IO
     DBinit();    //debounce init
 
@@ -54,33 +49,29 @@ int main(void) {
     //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
     //  REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep 
     //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
-    //  REFOCONbits.RODIV = 0b1111;  //changes frequency of pulse gen 
+    //  REFOCONbits.RODIV = 0b1111; // 1111//changes frequency of pulse gen 
     //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
 //  // Setting #3:
-    //  NewClk(500);
-    //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
-    //  REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep 
-    //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
-    //  REFOCONbits.RODIV = 0b1001;  //changes frequency of pulse gen 
-    //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
-//  // Setting #4:
      NewClk(500);
      TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
-     REFOCONbits.ROSSLP = 1; // Ref oscillator runs while in sleep
+     REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep 
      REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
-     REFOCONbits.RODIV = 0b0111; //0b0111; //for demo setting 4
+     REFOCONbits.RODIV = 0b1001;  //changes frequency of pulse gen 
      REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
+//  // Setting #4:
+    //  NewClk(500);
+    //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
+    //  REFOCONbits.ROSSLP = 1; // Ref oscillator runs while in sleep
+    //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
+    //  REFOCONbits.RODIV = 0b0111;  
+    //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
     
-    TimerInit(); //initialize timers for frequency counting
-    //ADCinit();  //initialize all analog/ADC bits
+    TimerInit(); //initialize timers & frequency capture settings
+    ADCinit();  //initialize analog/ADC bits
 
     while(1){
-    //   ADC_Display();
-
-    //these are in main for debugging purposes, feel free to remove
-      Disp2String("\rTMR2, COUNT: ");
-      Disp2Dec(TMR2);
-      Disp2Dec(count);
+       //current mode display
+       ADC_Display();
     }
     return 1;
 }

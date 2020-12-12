@@ -11,6 +11,7 @@
 void TimerInit(void);
 char* frequency(void);
 char* amplitude(void);
+void __attribute__((interrupt, no_auto_psv)) _IC1Interrupt(void);
 // void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void);
 // void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void);
 

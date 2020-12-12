@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/Midterm.X/ADC.c</file>
-            <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/Midterm.X/main.c</file>
-            <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/Midterm.X/nbproject/Makefile-impl.mk</file>
             <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/Midterm.X/pulse.c</file>
+            <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/Midterm.X/main.c</file>
+            <file>file:/S:/MPLABXProjects/ENCM511-B01-10/ENCM511-B01-10/Midterm.X/IOs.c</file>
         </group>
     </open-files>
 </project-private>
