@@ -1,15 +1,13 @@
-Microchip Technology Inc, v1.60 (B)
+Microchip Technology Inc, v1.60 (A)
 
 Tool Name:
   d:\program files\microchip\xc16\v1.60\bin\bin\..\bin/elf-ld.exe
 
 Command:
   -p24F16KA101 \
-  --mdfp=D:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16 \
   -o \
   dist/default/production/Midterm.X.production.elf \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/.. \
-  -LD:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC24F-KA-KL-KM_DFP/1.3.49/xc16/bin/../support/PIC24F/gld \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../lib \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../support/PIC24E/gld \
   -Ld:/program files/microchip/xc16/v1.60/bin/bin/../../support/PIC24F/gld \
@@ -208,7 +206,7 @@ d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatundidf.e
                               d:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatdidf.eo) (___floatundidf)
 
 
-xc16-ld 1.60 (B)
+xc16-ld 1.60 (A)
 
 Default Code Model: Small
 Default Data Model: Small
@@ -867,15 +865,15 @@ __FDS
  .debug_abbrev    0x00053d         0xc7 build/default/production/main.o
  .debug_abbrev    0x000604        0x12a build/default/production/pulse.o
 
-.debug_line       0x000000        0x8ae
+.debug_line       0x000000        0x755
  *(.debug_line)
- .debug_line      0x000000        0x154 build/default/production/ADC.o
- .debug_line      0x000154        0x11b build/default/production/ChangeClk.o
- .debug_line      0x00026f        0x133 build/default/production/IOs.o
- .debug_line      0x0003a2        0x183 build/default/production/UART2.o
- .debug_line      0x000525        0x126 build/default/production/debouncer.o
- .debug_line      0x00064b        0x11a build/default/production/main.o
- .debug_line      0x000765        0x149 build/default/production/pulse.o
+ .debug_line      0x000000        0x123 build/default/production/ADC.o
+ .debug_line      0x000123         0xea build/default/production/ChangeClk.o
+ .debug_line      0x00020d        0x102 build/default/production/IOs.o
+ .debug_line      0x00030f        0x152 build/default/production/UART2.o
+ .debug_line      0x000461         0xf5 build/default/production/debouncer.o
+ .debug_line      0x000556         0xe7 build/default/production/main.o
+ .debug_line      0x00063d        0x118 build/default/production/pulse.o
 
 .debug_frame      0x000000        0x34e
  *(.debug_frame)

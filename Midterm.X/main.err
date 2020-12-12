@@ -1,0 +1,25 @@
+Compiling S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\main on 12-Dec-20 at 12:37
+*** Error 18 "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\main.c" Line 2(10,16): File can not be opened
+    Not in "D:\Program Files (x86)\PICC\Devices\xc.h"
+    Not in "D:\Program Files (x86)\PICC\Drivers\xc.h"
+    Not in source "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\xc.h"
+    Not in local "xc.h"
+    Not in project "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\xc.h"
+    Not in default "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\xc.h"
+*** Error 18 "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\main.c" Line 3(10,22): File can not be opened
+    Not in "D:\Program Files (x86)\PICC\Devices\p24fxxxx.h"
+    Not in "D:\Program Files (x86)\PICC\Drivers\p24fxxxx.h"
+    Not in source "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\p24fxxxx.h"
+    Not in local "p24fxxxx.h"
+    Not in project "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\p24fxxxx.h"
+    Not in default "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\p24fxxxx.h"
+*** Error 18 "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\main.c" Line 4(10,25): File can not be opened
+    Not in "D:\Program Files (x86)\PICC\Devices\p24F16KA101.h"
+    Not in "D:\Program Files (x86)\PICC\Drivers\p24F16KA101.h"
+    Not in source "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\p24F16KA101.h"
+    Not in local "p24F16KA101.h"
+    Not in project "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\p24F16KA101.h"
+    Not in default "S:\MPLABXProjects\ENCM511-B01-10\ENCM511-B01-10\Midterm.X\p24F16KA101.h"
+*** Error 128 "D:\Program Files (x86)\PICC\Drivers\string.h" Line 26(2,7): A #DEVICE required before this line
+      4 Errors,  0 Warnings.
+Build Failed.

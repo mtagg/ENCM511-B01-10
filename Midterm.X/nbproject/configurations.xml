@@ -49,10 +49,8 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC24F-KA-KL-KM_DFP" vendor="Microchip" version="1.3.49"/>
+        <pack name="PIC24F-KA-KL-KM_DFP" vendor="Microchip" version="0.1.5"/>
       </packs>
-      <ScriptingSettings>
-      </ScriptingSettings>
       <compileType>
         <linkerTool>
           <linkerLibItems>
@@ -139,9 +137,6 @@
         <property key="relax" value="false"/>
         <property key="warning-level" value="emit-warnings"/>
       </C30-AS>
-      <C30-CO>
-        <property key="coverage-enable" value=""/>
-      </C30-CO>
       <C30-LD>
         <property key="additional-options-use-response-files" value="false"/>
         <property key="boot-eeprom" value="no_eeprom"/>
@@ -196,7 +191,6 @@
         <property key="legacy-libc" value="true"/>
         <property key="mpreserve-all" value="false"/>
         <property key="oXC16glb-macros" value=""/>
-        <property key="omit-pack-options" value="1"/>
         <property key="output-file-format" value="elf"/>
         <property key="preserve-all" value="false"/>
         <property key="preserve-file" value=""/>
@@ -259,7 +253,7 @@
         <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
         <property key="programoptions.usehighvoltageonmclr" value="false"/>
         <property key="programoptions.uselvpprogramming" value="false"/>
-        <property key="voltagevalue" value="3.25"/>
+        <property key="voltagevalue" value="3.0"/>
       </PICkit3PlatformTool>
     </conf>
   </confs>

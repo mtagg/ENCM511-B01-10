@@ -1,0 +1,34 @@
+D G "__PCD__" 0 0 ""5.097d""
+D G "__DEVICE__" 0 0 ""
+D G "__DATE__" 0 0 ""12-Dec-20""
+D G "__TIME__" 0 0 ""12:37:54""
+D G "_UNICODE" 0 0 ""?""
+D G "__EVAL" 0 0 ""?"" "MPLAB header libraries"
+D G "_STDIO" 1 12 ""
+D G "_STRING" 2 12 ""
+D G "_STDDEF" 3 13 ""
+D G "ptrdiff_t" 3 18 "unsigned int16"
+D G "size_t" 3 24 "unsigned int16"
+D G "wchar_t" 3 26 "unsigned char"
+D G "NULL" 3 27 "0"
+D G "offsetof" 3 29 "(s,f) (offsetofbit(s,f)/8)"
+D G "_CTYPE" 4 12 ""
+D G "islower" 4 14 "(x)  isamong(x,"abcdefghijklmnopqrstuvwxyz")"
+D G "isupper" 4 15 "(x)  isamong(x,"ABCDEFGHIJKLMNOPQRSTUVWXYZ")"
+D G "isalnum" 4 16 "(x)  isamong(x,"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")"
+D G "isalpha" 4 17 "(x)  isamong(x,"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")"
+D G "isdigit" 4 18 "(x)  isamong(x,"0123456789")"
+D G "isspace" 4 19 "(x)  ((x)==' ')"
+D G "isxdigit" 4 20 "(x) isamong(x,"0123456789ABCDEFabcdef")"
+D G "iscntrl" 4 21 "(x)  ((x)<' ')"
+D G "isprint" 4 22 "(x)  ((x)>=' ')"
+D G "isgraph" 4 23 "(x)  ((x)>' ')"
+D G "ispunct" 4 24 "(x)  (((x)>' ')&&!isalnum(x))"
+F N "memmove" 2 34 ""
+V L "s1" 2 34 "*void" `37 
+V L "s2" 2 34 "*void" `38 
+V L "n" 2 34 "int16" `39 
+F G "memmove" 2 35 "*int8(*void s1,*void s2,int16 n)" `36 
+V L "sc1" 2 36 "*int8" `40 
+V L "sc2" 2 37 "*int8" `41 
+D G "strcopy" 2 54 "strcpy"

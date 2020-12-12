@@ -38,26 +38,26 @@ int main(void) {
 //PULSE GENERATION SETTINGS FOR DEMO VIDEO:
 
 //  // Setting #1:
-    //  NewClk(8);
-    //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
-    //  REFOCONbits.ROSSLP = 0; // Ref oscillator is disabled in sleep 
-    //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
-    //  REFOCONbits.RODIV = 0b0011;  //changes frequency of pulse gen 
-    //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
+     NewClk(8);
+     TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
+     REFOCONbits.ROSSLP = 0; // Ref oscillator is disabled in sleep 
+     REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
+     REFOCONbits.RODIV = 0b0011;  //changes frequency of pulse gen 
+     REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
 //  // Setting #2:
-    //  NewClk(8);
+     //NewClk(8);
     //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
     //  REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep 
     //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
     //  REFOCONbits.RODIV = 0b1111; // 1111//changes frequency of pulse gen 
     //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
 //  // Setting #3:
-     NewClk(500);
-     TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
-     REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep 
-     REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
-     REFOCONbits.RODIV = 0b1001;  //changes frequency of pulse gen 
-     REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
+    //  NewClk(500);
+    //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
+    //  REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep 
+    //  REFOCONbits.ROSEL = 0; // Output base clk showing clock switching 
+    //  REFOCONbits.RODIV = 0b1001;  //changes frequency of pulse gen 
+    //  REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
 //  // Setting #4:
     //  NewClk(500);
     //  TRISBbits.TRISB15 = 0; // Set RB15/pin18 as output for REFO 
